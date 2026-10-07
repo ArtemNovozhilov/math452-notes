@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section 1: How it all began with the complex numbers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,500;1,400;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="style.css">
+<script>
+window.MathJax = {
+  loader: {load: ['[tex]/tagformat']},
+  tex: {
+    packages: {'[+]': ['tagformat']},
+    tags: 'ams',
+    tagformat: {number: (n) => '1.' + n},
+    macros: {
+      C: '\\mathbf{C}',
+      D: '\\mathrm{d}',
+      Div: '\\operatorname{div}',
+      E: ['\\expectation\\left(#1\\right)', 1],
+      I: '\\mathrm{i}',
+      Im: '\\mathop{\\mathrm{Im}}\\nolimits',
+      Ind: ['\\,\\mathbf{1}_{#1}', 1],
+      Int: '\\operatorname{int}',
+      N: '\\mathbf{N}',
+      Poi: ['\\poisson\\left(#1\\right)', 1],
+      Pr: ['\\probability\\left\\{#1\\right\\}', 1],
+      R: '\\mathbf{R}',
+      Re: '\\mathop{\\mathrm{Re}}\\nolimits',
+      Tr: '\\operatorname{tr}',
+      V: ['{\\mathbf{#1}}', 1],
+      Var: ['\\,\\mathrm{Var}\\left(#1\\right)', 1],
+      arctanh: '\\operatorname{arctanh}',
+      bd: '\\operatorname{bd}',
+      bs: ['{\\boldsymbol{#1}}', 1],
+      diag: '\\operatorname{diag}',
+      diam: '\\operatorname{diam}',
+      erf: '\\operatorname{erf}',
+      expectation: '\\operatorname{E}',
+      grad: '\\operatorname{grad}',
+      overbar: ['\\mkern 3.5mu\\overline{\\mkern-2mu#1\\mkern-3mu}\\mkern 3.5mu', 1],
+      pdt: '\\partial_t',
+      poisson: '\\operatorname{Poisson}',
+      probability: '\\operatorname{P}',
+      rank: '\\operatorname{rank}',
+      sign: '\\operatorname{sgn}'
+    }
+  }
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
+<script defer src="notes.js"></script>
+</head>
+<body>
+<div class="progress" aria-hidden="true"><span></span></div>
+<header class="topbar">
+  <a class="course-name" href="index.html">Math 452: Complex Analysis</a>
+  <a class="all-sections" href="index.html">All sections</a>
+</header>
+<div class="layout">
+<aside class="sidetoc" aria-label="On this page">
+  <p class="sidetoc-title">Section 1</p>
+  <ol>
+<li><a href="#sec1-1"><span class="tnum">1.1</span><span class="ttl">A few words about several Italian mathematicians</span></a></li>
+<li><a href="#sec1-2"><span class="tnum">1.2</span><span class="ttl">Cardano’s formula</span></a></li>
+<li><a href="#sec1:3"><span class="tnum">1.3</span><span class="ttl">A digression: How to guess the roots of polynomials with integer coefficients</span></a></li>
+<li class="adv"><a href="#sec1:4"><span class="tnum">1.4</span><span class="ttl">Solving a quartic equation or on the way to Ferrari’s formula</span><span class="opt">optional</span></a></li>
+  </ol>
+</aside>
+<main>
+<header class="hero">
+  <span class="bignum" aria-hidden="true">1</span>
+  <div class="hero-text">
+    <p class="kicker">Section</p>
+    <h1>How it all began with the complex numbers</h1>
+    <p class="byline">Math 452: <em>Complex Analysis</em> by Artem Novozhilov<sup>©</sup><br>e-mail: <a href="mailto:artem.novozhilov@ndsu.edu">artem.novozhilov@ndsu.edu</a>. Spring 2025</p>
+  </div>
+  <svg class="emblem" viewBox="0 0 160 160" aria-hidden="true">
+<line x1="8" y1="80" x2="152" y2="80"/><line x1="80" y1="152" x2="80" y2="8"/>
+<circle cx="80" cy="80" r="48"/>
+<line class="dash" x1="128" y1="80" x2="128" y2="34"/><line class="dash" x1="80" y1="34" x2="128" y2="34"/>
+<line class="ray" x1="80" y1="80" x2="128" y2="34"/>
+<circle class="pt" cx="128" cy="34" r="3.5"/>
+<text x="134" y="30">z</text><text x="138" y="96" class="ax">Re</text><text x="86" y="18" class="ax">Im</text>
+</svg>
+</header>
+<nav class="toc" aria-label="Contents">
+  <p class="toc-title">In this section</p>
+  <ol>
+<li><a href="#sec1-1"><span class="tnum">1.1</span><span class="ttl">A few words about several Italian mathematicians</span></a></li>
+<li><a href="#sec1-2"><span class="tnum">1.2</span><span class="ttl">Cardano’s formula</span></a></li>
+<li><a href="#sec1:3"><span class="tnum">1.3</span><span class="ttl">A digression: How to guess the roots of polynomials with integer coefficients</span></a></li>
+<li class="adv"><a href="#sec1:4"><span class="tnum">1.4</span><span class="ttl">Solving a quartic equation or on the way to Ferrari’s formula</span><span class="opt">optional</span></a></li>
+  </ol>
+</nav>
+<article class="notes">
+<p>Our goal in this course is to study the basics of <em>Complex Analysis</em>, which is, informally speaking, is a mathematical discipline that studies the properties of <em>analytic</em> (or <em>holomorphic</em>, do not worry, we’ll get to a precise definition in due time) functions of complex argument <span class="math inline">\(z\in\C\)</span>, where, as usual, notation <span class="math inline">\(z\in\C\)</span> means that variable <span class="math inline">\(z\)</span> belongs to the set <span class="math inline">\(\C\)</span> of all complex numbers (another standard notation for the same set is <span class="math inline">\(\mathbb C\)</span>, but I will stick in these notes to the former one). But before embarking on our main goal, we need to carefully understand <em>what</em> a complex number is. Yes, of course, the usual answer by anyone who already saw the complex numbers, is as follows: a complex number <span class="math inline">\(z\)</span> is an expression of the form <span class="math inline">\(a+\I b\)</span>, where <span class="math inline">\(a,b\in \R\)</span> (recall that <span class="math inline">\(\R\)</span> is the set of <em>real</em> numbers), and <span class="math inline">\(\I\)</span> is <em>the imaginary unit</em> that has the characteristic property <span class="math inline">\(\I^2=-1\)</span>. But then I will ask: Still, what is “<span class="math inline">\(\I\)</span>”? Can we have some other (physical, geometric) meaning of this creature other than this very strange, unmotivated, and even bizarre property of being negative one if squared? There is a very simple answer to this question (and, moreover, this answer is by no means unique!), but before providing it, I will give a short account of why something like <span class="math inline">\(\I^2=-1\)</span> turned out to be, on one hand, necessary, and, on the other hand, somewhat mysterious or <em>imaginary</em>.</p>
+<h2 id="sec1-1"><span class="secnum">1.1</span><span class="sectitle">A few words about several Italian mathematicians</span></h2>
+<p>Complex numbers how we know them were introduced to solve cubic equations of the form <span class="math display">\[
+x^3+ax^2+bx+c=0,
+\]</span> where <span class="math inline">\(a,b,c\)</span> are real numbers.</p>
+<p>For thousands of years people knew how to solve the quadratic equation <span class="math display">\[
+x^2+px+q=0\quad\Longleftrightarrow\quad x=\frac{-p\pm\sqrt{p^2-4q}}{2}\,,
+\]</span> which may have either two (real) roots, or one real root, or no real roots at all depending on the sign of the expression <span class="math inline">\(\Delta=p^2-4q\)</span>, which is called the <em>discriminant</em> of quadratic equation. Contrary to what some textbooks say, there was no issue with these three distinct possibilities, and especially with the fact that sometimes the quadratic equation has no real roots at all, since there is a transparent geometric interpretation for this algebraic problem. Namely, let me rewrite my quadratic equation as <span class="math display">\[
+x^2=-px-q,
+\]</span> and hence the roots of my equation geometrically are intersections of the quadratic parabola <span class="math inline">\(y=x^2\)</span> and the straight line <span class="math inline">\(y=-px-q\)</span>. Clearly, no matter how I pick <span class="math inline">\(p,q\)</span> and plot these two curves, it is only possible to have either two points of intersection, or one point, or no intersection at all (see Fig. <a href="#fig1:1">1</a>).</p>
+<figure id="fig1:1" style="--w:45%"><img src="figures/1_1.svg" alt="Figure 1"><figcaption><span class="fig-label">Figure 1.</span> Geometric interpretation of three possible cases for the quadratic equation: <span class="math inline">\((1)\)</span> two roots, <span class="math inline">\((2)\)</span> one root, <span class="math inline">\((3)\)</span> no roots.</figcaption></figure>
+<p>It took much longer to figure our how to attack a general cubic equation. It seems that the first person, who actually was able to solve the so-called <em>depressed</em> cubic equation <span class="math display">\[
+x^3+px+q=0
+\]</span> with only <em>positive</em> <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> was Italian mathematician Scipione del Ferro (1465–1526). He did not accept negative numbers and therefore did not think that he discovered something very general (e.g., he would consider the problem <span class="math inline">\(x^3=px+q\)</span> to be a completely different one). He kept his discovery as a secret, since there was a tradition at the time to have mathematical competitions with monetary prizes and hence this knowledge would allow him to make some cash. Only when he was dying he shared his secret with one of his students, Antonio Maria Fior, who decided to capitalize on this knowledge. In particular, he found out about Niccolo Fontana (1500–1577), who actually was a very bright mathematician, and who claimed that he figured the way to solve the cubic equations of the form <span class="math inline">\(x^3+px^2=q\)</span>. Fior belived that Fontana, who is nowadays more known under the nickname Tartaglia, was bluffing and challenged him. Tartaglia knew that Fior can solve depressed cubic equations and was able to discover the formula for the roots before the contest. So he was able to solve Fior’s problems, whereas his own problems were too complicated to Fior. Hence Tartaglia won the contest.</p>
+<p>Here in our story comes Girolamo Cardano (1501–1576), yet another Italian mathematician, who convinced Tartaglia to share his secret solution under the oath of not publishing it (that happened around 1539). Cardano kept his secret till 1545 when he found out that already del Ferro had the same method. He published these results about the cubic equation in his <em>Ars Magna</em> (“The Great Art”) giving credit to both del Ferro and Tartaglia (who, by the way, was furious and challenged Cardano for contest, which Cardano refused). Ludovico Ferrari (1522–1565) was a student of Cardano, who accepted the challenge and won the contest (Tartaglia lost a lot of money and died in poverty; which is even more ironic, in the history of mathematics the formula that solves the cubic equation is nowadays known as <em>Cardano’s formula</em> despite the fact that the two people who must get the credit for it are del Ferro and Tartaglia). To jump ahead, in Cardano’s formula under certain circumstances, one needs to use square roots of negative numbers. Cardano himself did not include any such explicit calculations in his book, and arguably the first person with an explicit example was Rafael Bombelli (1526–1572), who wrote a book on algebra that was published in 1572, and in which for the first time the rules how to work with complex numbers were formulated.</p>
+<h2 id="sec1-2"><span class="secnum">1.2</span><span class="sectitle">Cardano’s formula</span></h2>
+<p>To warm up, let us first recall how one can derive the formula for the roots of quadratic equation <span class="math display">\[
+ax^2+bx+c=0,
+\]</span> where <span class="math inline">\(a,b,c\in\R\)</span> and <span class="math inline">\(a\neq 0\)</span>. Since <span class="math inline">\(a\neq 0\)</span> I can divide by <span class="math inline">\(a\)</span> and <em>complete the square</em>, using the well known fact that for any real <span class="math inline">\(A,B\)</span>, <span class="math inline">\(A^2+2AB+B^2=(A+B)^2\)</span>. So, I have a chain of equivalent equalities (note that I am doing two operations that can always be performed without changing the value of an expression: I add and subtract the same number, and I multiply and divide by the same nonzero number, it is surprising how often these elementary tricks lead to substantial simplifications): <span class="math display">\begin{align*}
+ax^2+bx+c=0&amp;\Longleftrightarrow\\
+x^2+2\frac{b}{2a}x+\frac{c}{a}=0&amp;\Longleftrightarrow\\
+x^2+2\frac{b}{2a}x+\left(\frac{b}{2a}\right)^2-\left(\frac{b}{2a}\right)^2+\frac{c}{a}=0&amp;\Longleftrightarrow\\
+\left(x+\frac{b}{2a}\right)^2-\frac{b^2-4ac}{4a^2}=0&amp;\Longleftrightarrow\\
+\left(x+\frac{b}{2a}\right)^2=\frac{b^2-4ac}{4a^2}&amp;\Longleftrightarrow\\
+x+\frac{b}{2a}=\pm\frac{\sqrt{b^2-4ac}}{2a}&amp;\Longleftrightarrow\\
+x=\frac{-b\pm \sqrt{b^2-4ac}}{2a}\,,
+\end{align*}</span> and we recovered the familiar formula for the roots of the quadratic equation.</p>
+<p>Following the example of the quadratic equation one can try to eliminate the quadratic term in a cubic equation by <em>completing the cube</em>, using the formula <span class="math inline">\(A^3+3A^2B+3AB^2+B^3=(A+B)^3\)</span>.</p>
+<p>Let me start with a general cubic equation of the form <span class="math display">\[
+y^3+ay^2+by+c=0,
+\]</span> where <span class="math inline">\(a,b,c\)</span> are given (real) numbers, and, for notational simplicity, I already assumed that the leading coefficient at <span class="math inline">\(y^3\)</span> is equal to 1. If not, I can always divide by this coefficient as my first step. I have <span class="math display">\begin{align*}
+y^3+ay^2+by+c&amp;=\\
+y^3+3y^2\frac{a}{3}+3\left(\frac{a}{3}\right)^2y+\left(\frac{a}{3}\right)^3-3\left(\frac{a}{3}\right)^2y-\left(\frac{a}{3}\right)^3+by+c&amp;=\\
+\left(y+\frac{a}{3}\right)^3+y\left(b-\frac{a^2}{3}\right)+c-\left(\frac{a}{3}\right)^3&amp;=0,
+\end{align*}</span> which, after the substitution <span class="math inline">\(x=y+\frac{a}{3}\)</span>, becomes <span class="math display">\begin{align*}
+x^3+\left(x-\frac{a}{3}\right)\left(b-\frac{a^2}{3}\right)+c-\left(\frac{a}{3}\right)^3&amp;=\\
+x^3+x\left(b-\frac{a^2}{3}\right)+\frac{2a^3}{3^3}-\frac{ab}{3}+c&amp;=\\
+x^3+3p x+2 q&amp;=0,
+\end{align*}</span> where I introduced new parameters <span class="math display">\[
+3p=b-\frac{a^2}{3}\,,\quad 2q=\frac{2a^3}{3^3}-\frac{ab}{3}+c\,,
+\]</span> the coefficients 3 and 2 are chosen to simplify the subsequent formulas a little bit.</p>
+<p>Therefore, my first conclusion is that <em>any</em> general cubic equation can be reduced to the depressed form <span class="math display">\begin{equation}\label{eq1:1}
+    x^3+3px+2q=0.
+\end{equation}</span></p>
+<p>The next step is the one, which is absolutely non obvious. To motivate it, I note that if I am able somehow to get rid of <span class="math inline">\(3px\)</span> term in <span class="math inline">\(\eqref{eq1:1}\)</span>, then the problem would be solved. Sometimes it is nice to remember that raising to some power an expression of the form <span class="math inline">\(u-\frac{k}{u}\)</span> cancels a lot of terms, so I am making an <em>educated guess</em> to try another substitution <span class="math display">\[
+x=u-\frac{k}{u}\,,
+\]</span> where the constant <span class="math inline">\(k\)</span> will be determined later (an educated guess in mathematics is very often called an <em>ansatz</em>).</p>
+<p>I have, on one hand, <span class="math display">\[
+x^3=\left(u-\frac{k}{u}\right)^3=u^3-3u^2\frac{k}{u}+3u\frac{k^2}{u^2}-\frac{k^3}{u^3}=u^3-3uk+3\frac{k^2}{u}-\frac{k^3}{u^3}\,,
+\]</span> and on the other hand <span class="math display">\[
+3px=3p\left(u-\frac{k}{u}\right)=3pu-3\frac{pk}{u}\,.
+\]</span> Comparing the last two expressions, I notice that choosing <span class="math inline">\(k=p\)</span> in my substitution leads in the original equation to <span class="math display">\[
+u^3-\frac{p^3}{u^3}+2q=0,
+\]</span> which is a quadratic equation with respect to <span class="math inline">\(u^3\)</span>: <span class="math display">\[
+u^6+2q u^3-p^3=0,
+\]</span> which gives two solutions <span class="math display">\[
+u^3=-q\pm\sqrt{q^2+p^3}\,.
+\]</span> Returning to variable <span class="math inline">\(x\)</span>, I get <span class="math display">\[
+x=\sqrt[3]{-q\pm \sqrt{q^2+p^3}}-\frac{p}{\sqrt[3]{-q\pm \sqrt{q^2+p^3}}}\,.
+\]</span> There remains the question which sign to choose in my formulas, but I claim that it does not matter, the result will be the same for both “<span class="math inline">\(+\)</span>” and “<span class="math inline">\(-\)</span>”. Indeed, let me choose, e.g., “<span class="math inline">\(+\)</span>”. Then, since <span class="math display">\[
+(-q+\sqrt{q^2+p^3})(-q-\sqrt{q^2+p^3})=q^2-q^2-p^3=-p^3,
+\]</span> multiplying both numerator and denominator of the second term in my formula by its <em>conjugate</em> (at this point for us the conjugate of the expression <span class="math inline">\(A+B\)</span> is <span class="math inline">\(A-B\)</span>, and I use <span class="math inline">\((A+B)(A-B)=A^2-B^2\)</span>) and simplifying, I end up with <span class="math display">\begin{equation}\label{eq1:2}
+x=\sqrt[3]{-q+ \sqrt{q^2+p^3}}+\sqrt[3]{-q- \sqrt{q^2+p^3}},
+\end{equation}</span> which is <em>Cardano’s formula</em> for the depressed cubic equation <span class="math inline">\(\eqref{eq1:1}\)</span> (note that depending on the form of the depressed cubic, it is possible to have different forms of Cardano’s formula). I invite the reader to check that choosing sign “<span class="math inline">\(-\)</span>” in the above formula leads to exactly the same expression.</p>
+<p>To get some practice with Cardano’s formula, let’s solve <span class="math display">\[
+x^3-6x-6=0.
+\]</span> I have that <span class="math inline">\(p=-2,q=-3\)</span>, which leads to <span class="math display">\[
+x=\sqrt[3]{3+\sqrt{3^2-2^3}}+\sqrt[3]{3-\sqrt{3^2-2^3}}=\sqrt[3]{4}+\sqrt[3]{2},
+\]</span> which can be directly checked to be a legitimate root of our problem. Is it possible to have other roots? Yes, of course, but if we already know one root, we can always use the long division algorithm to reduce our problem to a quadratic equation, whose solution we know (make sure that you clearly understand the meaning of the previous phrase).</p>
+<p>So, the problem solved? Not so fast.</p>
+<p>Look at <span class="math display">\[
+x^3-15 x-4=0,
+\]</span> which yields, using Cardano’s formula with <span class="math inline">\(p=-5,q=-2\)</span>, <span class="math display">\[
+x=\sqrt[3]{2+11\sqrt{-1}}+\sqrt[3]{2-11\sqrt{-1}}\,.
+\]</span> I am tempted to say that since I need to extract square roots from negative numbers it indicates that my problem has no solution, as I explained when I presented the formula for the quadratic equation. But geometrically the situation now is very different! According to <span class="math inline">\(\eqref{eq1:1}\)</span>, my roots are the intersections of the cubic parabola <span class="math inline">\(y=x^3\)</span> and a straight line <span class="math inline">\(y=-3px-2q\)</span>. Clearly, no matter what <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> are, there must be at least one point of intersection (see Fig. <a href="#fig1:2">2</a>). In other words: Any cubic equation has at least one (real) root.</p>
+<figure id="fig1:2" style="--w:45%"><img src="figures/1_2.svg" alt="Figure 2"><figcaption><span class="fig-label">Figure 2.</span> Geometrically solving cubic equation.</figcaption></figure>
+<p>For our specific example a few seconds of thought (or see Section <a href="#sec1:3">1.3</a> for an algorithmic approach) yields that the root we are looking for is <span class="math inline">\(x=4\)</span>. And it was actually Bombelli’s ingenious idea, after looking at Cardano’s formula, to assume that <span class="math display">\[
+4=x=\sqrt[3]{2+11\sqrt{-1}}+\sqrt[3]{2-11\sqrt{-1}}=2+n\sqrt{-1}+2-n\sqrt{-1}=4,
+\]</span> where I need only to determine <span class="math inline">\(n\)</span> from the equality <span class="math display">\[
+\sqrt[3]{2+11\sqrt{-1}}=2+n\sqrt{-1}
+\]</span> or, after raising to the third power, <span class="math display">\[
+2+11\sqrt{-1}=(2+n\sqrt{-1})^3,
+\]</span> which means that I must have the rules of addition and multiplication of numbers that involve <span class="math inline">\(\sqrt{-1}\)</span>. For addition it is quite (only?) natural to require <span class="math display">\[
+(a+b\sqrt{-1})+(c+d\sqrt{-1})=(a+c)+(b+d)\sqrt{-1}.
+\]</span> Multiplication is certainly trickier, and I choose <span class="math display">\[
+(a+b\sqrt{-1})(c+d\sqrt{-1})=(ac+bd\sqrt{-1}\sqrt{-1})+(bc+ad)\sqrt{-1}=(ac-bd)+(bc+ad)\sqrt{-1},
+\]</span> where I, following Bombelli, used a “natural” calculation <span class="math inline">\(\sqrt{-1}\sqrt{-1}=\sqrt{(-1)^2}=-1\)</span>, which by no means obvious (as late as 1770 Leonard Euler, great Swiss mathematician, argued that <span class="math inline">\(\sqrt{-3}\sqrt{-2}=\sqrt{6}\)</span>, which is incorrect)! But if I stick to Bombelli’s rule, I can easily infer that <span class="math inline">\(n=1\)</span> in my formulas, i.e., <span class="math display">\[
+(2+\sqrt{-1})^3=2+11\sqrt{-1},\quad (2-\sqrt{-1})^3=2-11\sqrt{-1},
+\]</span> and everything works out as required.</p>
+<p>Much later Euler used the symbol <span class="math inline">\(\I\)</span> to denote the (positive) square root of <span class="math inline">\(-1\)</span>, and therefore my arithmetic rules become <span class="math display">\begin{align*}
+(a+\I b)+(c+\I d)&amp;=(a+c)+\I(b+d),\\
+(a+\I b)(c+\I d)&amp;=(ac-bd)+\I(bc+ad),
+\end{align*}</span> which you all saw before.</p>
+<p>After all these algebraic and historical details I can finally explain why the name “imaginary” was used. The main point here is that these numbers, which did not seem to have a simple physical or geometric meaning, allow us to find perfectly fine <em>real</em> solutions (look again at the figure with the cubic parabola), i.e., they are used as a not very well understood, but necessary intermediate step in calculations that leads to perfectly meaningful answers. Moreover, the example I picked is not an artificial one. It can be proved, using quite an involved algebraic machinery, that if a cubic polynomial with integer coefficients has three irrational <em>real</em> roots, it is simply impossible to express them with radicals of any degree without introducing square roots of negative numbers (this phenomenon has a poetic Latin name <em>casus irreducibilis</em>). That is why these unavoidable strange numbers were perceived as something mysterious (e.g., in 1702 Gottfried Wilhelm Leibniz, one of the fathers of Calculus, described <span class="math inline">\(\I\)</span> as “that amphibian between existence and nonexistence.”) Only by the very end of the eighteenth century it was realized (by several people simultaneously) that there was a perfectly fine concrete interpretation of complex numbers: viz., they are exactly points (or vectors) on the plane that can be added and multiplied following some certain natural rules. I will expand on this much more in the next lecture.</p>
+<h2 id="sec1:3"><span class="secnum">1.3</span><span class="sectitle">A digression: How to guess the roots of polynomials with integer coefficients</span></h2>
+<p>Any (well, almost) student knows how to solve the quadratic equation <span class="math display">\[
+ax^2+bx+c=0,
+\]</span> and almost no one remembers Cardano’s formula for determining the roots of a cubic polynomial (and for a good reason, since even in simple cases it often leads to expressions with square and cubic roots that are difficult to comprehend, see one exercise below). To complicate the matter further, I would like to state that although for polynomials of degree 4 it is possible to find a formula similar to Cardano’s one (if you are curious, see Section <a href="#sec1:4">1.4</a>), for a general polynomial of degree five it is <em>impossible</em> to find such a formula, which is a deep and beautiful mathematical result (google Abel–Ruffini theorem). So what if one needs to determine roots of a polynomial of degree bigger then two? In general this must be done numerically, and there exist very efficient algorithms of doing this. In class, however, a student is often given a polynomial equation with <em>integer</em> coefficients: <span class="math display">\[
+a_n x^n+a_{n-1}x^{n-1}+\ldots+a_1 x+a_0=0,
+\]</span> where all <span class="math inline">\(a_j\)</span> are integers. For such equations the following holds:</p>
+<div class="thm proposition style-plain" id="proposition-1-1"><p><span class="thm-head">Proposition 1.1.</span> Assume that all coefficients are integers and <span class="math inline">\(a_0,a_n\neq 0\)</span>. If <span class="math inline">\(x=p/q\)</span> is a rational root of the above equation, and <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> are coprime, then <span class="math inline">\(p\)</span> divides <span class="math inline">\(a_0\)</span> and <span class="math inline">\(q\)</span> divides <span class="math inline">\(a_n\)</span>.</p>
+</div>
+<p>Hence, if asked to find a root of a polynomial with integer coefficients, I first decide which integers divide <span class="math inline">\(a_0\)</span>, which divide <span class="math inline">\(a_n\)</span>, form all possible fractions out of my lists, and test them one by one, hoping for the best.</p>
+<div class="proof"><p><span class="thm-head">Proof.</span> In my proof I will use the fact that if integer <span class="math inline">\(a\)</span> divides the product <span class="math inline">\(bc\)</span> of integers <span class="math inline">\(b\)</span> and <span class="math inline">\(c\)</span>, and <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are coprime, which means that they have no common prime factors in their prime factorization, then <span class="math inline">\(a\)</span> must divide <span class="math inline">\(c\)</span> (this fact sometimes called <em>Euclid’s lemma</em>, and it certainly requires a proof on its own).</p>
+<p>Assume that <span class="math inline">\(x=p/q\)</span> is a rational root and <span class="math inline">\(p,q\)</span> are coprime. Plugging it into the equation yields <span class="math display">\[
+a_n\left(\frac{p}{q}\right)^n+a_{n-1}\left(\frac{p}{q}\right)^{n-1}+\ldots+a_1\frac{p}{q}+a_0=0,
+\]</span> or, after some rearrangement, <span class="math display">\[
+-a_n p^n=a_{n-1}p^{n-1}q+\ldots+a_1 p q^{n-1}+a_0 q^n.
+\]</span> Here <span class="math inline">\(q\)</span> clearly divides the right side, therefore it must divide the left side of equality as well. Since <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> are coprime then <span class="math inline">\(p^n\)</span> and <span class="math inline">\(q\)</span> are coprime. By Euclid’s lemma, <span class="math inline">\(q\)</span> must divide <span class="math inline">\(a_n\)</span>.</p>
+<p>Similarly, rearranging the equality in a different way, I get <span class="math display">\[
+-a_0q=a_nq\left(\frac{p}{q}\right)^n+a_{n-1}q\left(\frac{p}{q}\right)^{n-1}+\ldots+a_1p.
+\]</span> Now <span class="math inline">\(p\)</span> divides the right side, hence it must divide the left side, and therefore must divide, by the same reasonings, <span class="math inline">\(a_0\)</span>. <span class="qed">&#9632;</span></p></div>
+<div class="thm exercise style-definition" id="exercise-1"><p><span class="thm-head">Exercise 1.</span> Show that <span class="math inline">\(p(x)=2x^3+x-1\)</span> has no rational roots.</p>
+</div>
+<div class="thm exercise style-definition" id="exercise-2"><p><span class="thm-head">Exercise 2.</span> Assume that <span class="math inline">\(a_n=1\)</span> and formulate a useful corollary of the proven proposition.</p>
+</div>
+<div class="thm exercise style-definition" id="exercise-3"><p><span class="thm-head">Exercise 3.</span> Find all roots of <span class="math display">\[
+x^3-2x+4=0
+\]</span> (there are three roots, one is real and two complex).</p>
+<p>Using Cardano’s formula find the real root of this equation. Convince yourself that the formula gives the correct answer (this last part is not as simple as it seems).</p>
+</div>
+<div class="advanced"><p class="adv-note">Optional material</p>
+<h2 id="sec1:4"><span class="secnum">*1.4</span><span class="sectitle">Solving a quartic equation or on the way to Ferrari’s formula</span></h2>
+<p>I mentioned above that it is possible to find a formula for the quartic equation <span class="math display">\[
+y^4+4ay^3+by^2+cy+d=0,
+\]</span> where <span class="math inline">\(a,b,c,d\in\R\)</span>. Here is the main idea. Recall that while solving the quadratic equation, we first completed the square. When we were solving the cubic equation, we completed the cube. Not surprisingly, in the situation of degree four the first step would be <em>to complete the fourth power</em> relying on the formula <span class="math display">\[
+(A+B)^4=A^4+4A^3B+6A^2B^2+4AB^3+B^4.
+\]</span> Now it is probably clear why I included coefficient 4 in the front of <span class="math inline">\(ay^3\)</span> term above. So, I rewrite my equation as <span class="math display">\[
+y^4+4ay^3+6a^2y^2+4a^3y+a^4-6a^2y^2-4a^3y-a^4+by^2+cy+d=0
+\]</span> and hence obtain <span class="math display">\[
+(y+a)^4+y^2(b-6a^2)+y(c-4a^3)+d-a^4=0.
+\]</span> At this point it should be clear that after the substitution <span class="math inline">\(x=y+a\)</span> I will have the equation <span class="math display">\[
+x^4+2px^2+2qx+r=0,
+\]</span> where my new coefficients <span class="math inline">\(p,q,r\)</span> depend on <span class="math inline">\(a,b,c,d\)</span>. Almost immediate is to try to complete the square: <span class="math display">\[
+(x^2+p)^2+2qx+r-p^2=0,
+\]</span> or, better for the following, <span class="math display">\[
+(x^2+p)^2=p^2-2qx-r.
+\]</span> If I had a number on the right, the problem would be solved, but it still involves <span class="math inline">\(x\)</span>. Another good situation would be if the right hand side of the equality would be a full square, but as it is given now, I do not have enough degrees of freedom to turn it into a full square. Here comes another magical trick: let me add a number <span class="math inline">\(t\)</span> inside the square on the left side such that adding the same amount to the right side would turn it into a full square. Not an obvious move for sure.</p>
+<p>So, I take, instead of <span class="math inline">\((x^2+p)^2\)</span>, <span class="math inline">\((x^2+p+t)^2\)</span>, where <span class="math inline">\(t\)</span> is a number that will be determined later. I have, <span class="math display">\[
+(x^2+p+t)^2=(x^2+p)^2+2t(x^2+p)+t^2,
+\]</span> so to equal things out, I need <span class="math display">\[
+(x^2+p+t)^2=p^2-2qx-r+2t(x^2+p)+t^2,
+\]</span> or, after some simplification, <span class="math display">\[
+(x^2+p+t)^2=2tx^2-2qx+(t^2+2pt+p^2-r).
+\]</span> Notice that on the right I have a quadratic polynomial with respect to <span class="math inline">\(x\)</span>, and it will be a full square if and only if it has unique real root <span class="math inline">\(\hat x\)</span> (if you are confused at this point think about <span class="math inline">\(x^2-2x+1=(x-1)^2\)</span>, which has only one real root <span class="math inline">\(\hat x=1\)</span>). Moreover, we know that this situation exactly corresponds to the case when the discriminant <span class="math inline">\(\Delta\)</span> of this polynomial is equal to zero. I compute <span class="math display">\[
+\Delta = 4q^2-4(2t)(t^2+2pt+p^2-r)=0\Longleftrightarrow -2t^3-4pt^2-2t(p^2-r)+q^2=0,
+\]</span> but the last equation is a cubic one, which we know how to solve! We have Cardano’s formula <span class="math inline">\(\eqref{eq1:2}\)</span>, which, at least in principle, can handle any cubic equation. Let me denote this one special <span class="math inline">\(t\)</span> that solves the last equation as <span class="math inline">\(\hat t\)</span>. For this special <span class="math inline">\(\hat t\)</span> I can find the unique real root of <span class="math inline">\(2\hat tx^2-2qx+(\hat t^2+2p\hat t+p^2-r)=0\)</span>, which I denote <span class="math inline">\(\hat x\)</span>. Now my equation becomes <span class="math display">\[
+\bigl(x^2+p+\hat t\bigr)^2=2\hat t(x-\hat x)^2,
+\]</span> or <span class="math display">\[
+x^2+p+\hat t=\pm\sqrt{2\hat t}(x-\hat x),
+\]</span> which is a pair of quadratic equations, and which are easy to solve. Putting all the steps together in one formula would result in so-called <em>Ferrari’s formula</em> for solving quartic equations (I will not ask to do it even as an optional exercise, if you are really eager to pursue it, do it at your own risk).</p>
+<div class="thm exercise style-definition" id="exercise-4"><p><span class="thm-head">Exercise 4.</span> Using the procedure outlined above confirm that the four roots of <span class="math display">\[
+x^4+6x^2+8x+21=0
+\]</span> are <span class="math inline">\(1\pm\I\sqrt{6}\)</span> and <span class="math inline">\(-1\pm\I\sqrt{2}\)</span>.</p>
+</div>
+<p>To summarize, while solving the cubic equation, we needed to solve a quadratic one as an intermediate step. For the quartic equation, an axillary cubic equation had to be solved. A naive intuition at this point may whisper that it is quite probable that for solving an equation of degree five we just need to be smart enough to find a correct intermediate quartic equation, and both Abel and Ruffini could be wrong. It will not work, do not try it (but if you do try hard enough you will find that an equation of degree five requires solving an equation of degree six in the middle, and the equation of degree six requires solving an equation of degree seven, and so on ad infinitum).</p>
+<div class="thm exercise style-definition" id="exercise-5"><p><span class="thm-head">Exercise 5.</span> Memorizing both Cardano’s and Ferrari’s formulas is pointless, a good idea is to remember about their existence. I did use a formula in the proofs above, which you should know in the general form. Specifically, let <span class="math inline">\(n\)</span> be a positive integer and <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> be two real numbers. Then I claim that <span class="math display">\[
+(A+B)^n=\sum_{k=0}^n {n\choose k}A^{n-k}B^k,
+\]</span> where <span class="math display">\[
+{n\choose k}=\frac{n!}{k!(n-k)!}={n\choose n-k}\,,
+\]</span> (and <span class="math inline">\(k!\)</span>, of course, is, <span class="math inline">\(1\cdot2\cdot\ldots\cdot k\)</span>, <span class="math inline">\(0!=1\)</span>). This formula is called <em>Newton’s binomial theorem</em>. Convince yourself that it gives exactly the expressions I used above for <span class="math inline">\(n=2,3,4\)</span>. If you never saw it before, prove it. This is a good exercise.</p>
+</div>
+</div>
+</article>
+<nav class="pager" aria-label="More sections"><span></span><span></span></nav>
+</main>
+</div>
+<a class="to-top" href="#" aria-label="Back to top">&uarr;</a>
+</body>
+</html>
