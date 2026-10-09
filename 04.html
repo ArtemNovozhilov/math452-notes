@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section 4: Functions of complex variables. Continuity and differentiability</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,500;1,400;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="style.css">
+<script>
+window.MathJax = {
+  loader: {load: ['[tex]/tagformat']},
+  tex: {
+    packages: {'[+]': ['tagformat']},
+    tags: 'ams',
+    tagformat: {number: (n) => '4.' + n},
+    macros: {
+      Arg: '\\operatorname{Arg}',
+      C: '\\mathbf{C}',
+      D: '\\mathrm{d}',
+      Div: '\\operatorname{div}',
+      E: ['\\expectation\\left(#1\\right)', 1],
+      I: '\\mathrm{i}',
+      Im: '\\mathop{\\mathrm{Im}}\\nolimits',
+      Ind: ['\\,\\mathbf{1}_{#1}', 1],
+      Int: '\\operatorname{int}',
+      N: '\\mathbf{N}',
+      Poi: ['\\poisson\\left(#1\\right)', 1],
+      Pr: ['\\probability\\left\\{#1\\right\\}', 1],
+      R: '\\mathbf{R}',
+      Re: '\\mathop{\\mathrm{Re}}\\nolimits',
+      Tr: '\\operatorname{tr}',
+      V: ['{\\mathbf{#1}}', 1],
+      Var: ['\\,\\mathrm{Var}\\left(#1\\right)', 1],
+      Z: '\\mathbf{Z}',
+      arctanh: '\\operatorname{arctanh}',
+      bd: '\\operatorname{bd}',
+      bs: ['{\\boldsymbol{#1}}', 1],
+      diag: '\\operatorname{diag}',
+      diam: '\\operatorname{diam}',
+      erf: '\\operatorname{erf}',
+      expectation: '\\operatorname{E}',
+      grad: '\\operatorname{grad}',
+      overbar: ['\\mkern 3.5mu\\overline{\\mkern-2mu#1\\mkern-3mu}\\mkern 3.5mu', 1],
+      pdt: '\\partial_t',
+      poisson: '\\operatorname{Poisson}',
+      probability: '\\operatorname{P}',
+      rank: '\\operatorname{rank}',
+      sign: '\\operatorname{sgn}'
+    }
+  }
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
+<script defer src="notes.js"></script>
+</head>
+<body>
+<div class="progress" aria-hidden="true"><span></span></div>
+<header class="topbar">
+  <a class="course-name" href="index.html">Math 452: Complex Analysis</a>
+  <a class="all-sections" href="index.html">All sections</a>
+</header>
+<div class="layout">
+<aside class="sidetoc" aria-label="On this page">
+  <p class="sidetoc-title">Section 4</p>
+  <ol>
+
+  </ol>
+</aside>
+<main>
+<header class="hero">
+  <span class="bignum" aria-hidden="true">4</span>
+  <div class="hero-text">
+    <p class="kicker">Section</p>
+    <h1>Functions of complex variables. Continuity and differentiability</h1>
+    <p class="byline">Math 452: <em>Complex Analysis</em> by Artem Novozhilov<sup>©</sup><br>e-mail: <a href="mailto:artem.novozhilov@ndsu.edu">artem.novozhilov@ndsu.edu</a>. Spring 2027</p>
+  </div>
+  <svg class="emblem" viewBox="0 0 160 160" aria-hidden="true">
+<line x1="8" y1="80" x2="152" y2="80"/><line x1="80" y1="152" x2="80" y2="8"/>
+<circle cx="80" cy="80" r="48"/>
+<line class="dash" x1="128" y1="80" x2="128" y2="34"/><line class="dash" x1="80" y1="34" x2="128" y2="34"/>
+<line class="ray" x1="80" y1="80" x2="128" y2="34"/>
+<circle class="pt" cx="128" cy="34" r="3.5"/>
+<text x="134" y="30">z</text><text x="138" y="96" class="ax">Re</text><text x="86" y="18" class="ax">Im</text>
+</svg>
+</header>
+<nav class="toc" aria-label="Contents">
+  <p class="toc-title">In this section</p>
+  <ol>
+
+  </ol>
+</nav>
+<article class="notes">
+<p>Let me start directly with a definition.</p>
+<div class="thm definition style-plain" id="definition-4-1"><p><span class="thm-head">Definition 4.1.</span> We say that on the set <span class="math inline">\(E\subseteq \C\)</span> a complex function <span class="math inline">\(f\)</span> is defined, which we will denote <span class="math display">\[
+w=f(z),
+\]</span> if for any <span class="math inline">\(z\in E\)</span> some specific <em>(</em>but not necessarily unique<em>)</em> <span class="math inline">\(w\in\C\)</span> are assigned. We also write <span class="math display">\[
+f\colon E\longrightarrow \C
+\]</span> to denote function <span class="math inline">\(f\)</span>.</p>
+</div>
+<p>Geometrically this definition means that for each point <span class="math inline">\(z\in E\)</span> on one complex plane a mapping <span class="math inline">\(f\)</span> is defined that assigns to specific points in <span class="math inline">\(E\subseteq \C\)</span> point(s) <span class="math inline">\(w\)</span> in another complex plane. Quite different from the functions of real variables in general we do not require that such point <span class="math inline">\(w=f(z)\)</span> is unique for unique specific <span class="math inline">\(z\)</span>; it is quite natural to consider <em>multi valued</em> functions in complex analysis (recall the function <span class="math inline">\(\Arg z\)</span> for instance). If, however, the complex function <span class="math inline">\(f\)</span> is <em>single valued</em>, i.e., to each <span class="math inline">\(z\in E\)</span> only one <span class="math inline">\(w\in\C\)</span> is assigned, then the given definition of a complex function is equivalent to defining two real valued functions of two real variables (recall that the definition of a real valued function requires the output of the function to be unique): <span class="math display">\[
+(x,y)\mapsto \bigl(u(x,y),v(x,y)\bigr).
+\]</span> Here we have that variables <span class="math inline">\((x,y)\)</span> correspond to the point <span class="math inline">\(z\)</span> from the set <span class="math inline">\(E\)</span>, and variables <span class="math inline">\((u,v)\)</span> correspond to the coordinates of the point <span class="math inline">\(w=f(z)\)</span> in another complex plane.</p>
+<p>Here a curious student should be a little worried: What do we actually gain by moving from two real valued functions of two real variables to one complex function? And here is a basic answer: Complex Analysis or the Theory of Functions of Complex Variables does not in general study <em>arbitrary</em> mappings of one plane to another, which can be rather wild behaved and in this form belong to Real Analysis. Specifically, Complex Analysis studies much narrower class of mappings, which are called <em>holomorphic</em> or <em>analytic</em> functions. We will see precise definitions shortly, but at this point I would like to mention that such functions have a number of remarkable and inherently intertwined properties, some of which we will be studying.</p>
+<p>Here are a few examples of functions of complex variables:</p>
+<ol>
+<li><p>A constant function <span class="math inline">\(f(z)=c\,,c\in\C\)</span>. Here <span class="math inline">\(E=\C\)</span>.</p></li>
+<li><p>A linear function <span class="math inline">\(f(z)=az+b,\,a,b\in\C\)</span>. Here <span class="math inline">\(E=\C\)</span>.</p></li>
+<li><p>A polynomial <span class="math inline">\(p(z)=c_n z^n+c_{n-1}z^{n-1}+\ldots+c_1z+c_0\)</span> is defined clearly for all <span class="math inline">\(E=\C\)</span>. Here <span class="math inline">\(c_j\)</span> are complex numbers.</p></li>
+<li><p>A fractional linear function <span class="math display">\[
+f(z)=\frac{az+b}{cz+d}\,,\quad a,b,c,d\in\C.
+\]</span> The domain <span class="math inline">\(E\)</span> on which this function is defined is <span class="math inline">\(E=\C\setminus\{z=-d/c\}\)</span> (at least for now).</p></li>
+<li><p>A rational function <span class="math display">\[
+f(z)=\frac{p(z)}{q(z)}\,,
+\]</span> where <span class="math inline">\(p,q\)</span> are polynomials. This function is defined everywhere except points <span class="math inline">\(\hat z\)</span> for which <span class="math inline">\(q(\hat z)=0\)</span>.</p></li>
+<li><p><span class="math display">\[
+f(z)=\bar z.
+\]</span> Here the relation with the real case is especially simple: <span class="math inline">\(u(x,y)=x,\,v(x,y)=-y\)</span>.</p></li>
+<li><p><span class="math display">\[f(z)=|z|=\sqrt{x^2+y^2}\,,
+\]</span> This function is equivalent to defining two real functions <span class="math inline">\(u(x,y)=\sqrt{x^2+y^2},\,v(x,y)=0\)</span>.</p></li>
+<li><p><span class="math display">\[f(z)=f(x+\I y)=x+y+\I xy.\]</span> This function is equivalent to defining two real valued functions <span class="math inline">\(u(x,y)=x+y\)</span> and <span class="math inline">\(v(x,y)=xy\)</span>. (Can you write it in the complex variable <span class="math inline">\(z\)</span>?)</p></li>
+<li><p>A two-valued function <span class="math display">\[
+f(z)=z^{\frac{1}{2}}=\sqrt{z}.
+\]</span> Recall that any complex number, different from zero, raised to the power <span class="math inline">\(1/2\)</span> has two complex values. Also note that, however misleading, there is a big difference (at least in these notes) when I write <span class="math inline">\(\sqrt{a}\)</span> for positive or complex <span class="math inline">\(a\)</span>. If <span class="math inline">\(a\)</span> is positive (and hence real) then <span class="math inline">\(\sqrt{a}=b\)</span> is the unique positive real <span class="math inline">\(b&gt;0\)</span> such that <span class="math inline">\(b^2=a\)</span> by definition. Note that there is always second real number <span class="math inline">\(-b\)</span> which also satisfies <span class="math inline">\((-b)^2=a\)</span>, and to emphasize it, when needed, e.g., for the roots of quadratic polynomial, I write <span class="math inline">\(b=\pm \sqrt{a}\)</span>. If <span class="math inline">\(a\)</span> is not positive and not zero then <span class="math inline">\(\sqrt{a}=a^{1/2}\)</span> is two complex numbers. For instance, <span class="math inline">\(\sqrt{1}=1\)</span> but <span class="math inline">\(\sqrt{-1}=\pm \I\)</span>. Some people prefer to write in this case the rational power <span class="math inline">\(\frac{1}{2}\)</span>, but it also has its own shortcomings.</p></li>
+<li><p>A multi-valued function <span class="math display">\[
+f(z)=\Arg z.
+\]</span> For instance, <span class="math inline">\(f(-1)=\{\pi+2\pi k,\,k\in\Z\}\)</span>, i.e., for each complex point <span class="math inline">\(z\neq 0\)</span> there are countably many values of this function.</p></li>
+</ol>
+<p>I note that at this point we do not know what <span class="math inline">\(\exp z\)</span> or <span class="math inline">\(\sin z\)</span> actually mean, but soon we’ll get there.</p>
+<p>For now we put aside the fact that complex functions can be multi-valued and assume that all the functions we are working with are single valued. Specifically, first I define a limit of a complex (and single) valued function when <span class="math inline">\(z\to z_0\)</span>. To be clear, I always assume that my <span class="math inline">\(f\)</span> is defined on some open (and non-empty, I will stop mentioning this) set <span class="math inline">\(E\)</span>, and it is possible to have two possibilities: first, when <span class="math inline">\(z_0\in E\)</span> itself (i.e., it is an interior point of the set <span class="math inline">\(E\)</span>) or, second, when <span class="math inline">\(z_0\in\partial E\)</span> is a boundary point of <span class="math inline">\(E\)</span>. Let us ignore the second case for now.</p>
+<div class="thm definition style-plain" id="definition-4-2"><p><span class="thm-head">Definition 4.2.</span> Let <span class="math inline">\(E\subseteq \C\)</span> be an open set. Let <span class="math inline">\(f\colon E\longrightarrow \C\)</span>, <span class="math inline">\(z_k,z_0\in E\)</span>. We say that <span class="math display">\[
+\lim_{z\to z_0}f(z)=w,
+\]</span> if for any sequence <span class="math inline">\((z_k)_{k=1}^\infty\)</span> that converges to <span class="math inline">\(z_0\)</span> and <span class="math inline">\(z_k\neq z_0\)</span>, the sequence <span class="math inline">\(\bigl(f(z_k)\bigr)_{k=1}^\infty\)</span> converges to <span class="math inline">\(w\)</span>. We also denote it <span class="math display">\[
+f(z)\to w,\quad\mbox{as }z\to z_0.
+\]</span></p>
+</div>
+<p>The definition I gave is actually equivalent to the definition of a limit of a function that the students saw in Calculus I (albeit for real valued functions). If you took an introductory real analysis class, you may have seen a proof of this equivalence. Here is this second definition.</p>
+<div class="thm definition style-plain" id="definition-4-3"><p><span class="thm-head">Definition 4.3.</span> We say that <span class="math display">\[
+\lim_{z\to z_0}f(z)=w,
+\]</span> if no matter how small real <span class="math inline">\(\varepsilon&gt;0\)</span> is chosen there always exists real <span class="math inline">\(\delta&gt;0\)</span> such that for all <span class="math inline">\(z\in B_\delta(z_0)\setminus\{z_0\}\)</span> <em>(</em>which means <span class="math inline">\(0&lt;|z-z_0|&lt;\delta\)</span><em>)</em> one has <span class="math display">\[
+f(z)\in B_\varepsilon(w)\quad (\mbox{i.e., }|f(z)-w|&lt;\varepsilon).
+\]</span></p>
+</div>
+<p>Similarly, I can introduce the limit of a function at infinity.</p>
+<div class="thm exercise style-definition" id="exercise-1"><p><span class="thm-head">Exercise 1.</span> Write down carefully a definition of the limit of a given function <span class="math inline">\(f\)</span> when <span class="math inline">\(z\to\infty\)</span>. Do not forget the case when the limit itself is infinite.</p>
+</div>
+<p>I note that although the definitions for the limit of a function of complex variable is verbatim the same as for a function of real variable, it is much more restrictive! For a function of real variable we have only two ways to approach a point: from left or from right, whereas for a function of complex variable there are a multitude of various ways to approach the same point <span class="math inline">\(z_0\)</span>, and they all must yield the same limit.</p>
+<div class="thm example style-definition" id="ex.1"><p><span class="thm-head">Example 4.4.</span> Consider <span class="math display">\[
+f(z)=f(x+\I y)=\begin{cases}0,&amp;y=0,\\
+1,&amp;y\neq 0.
+\end{cases}
+\]</span> This function, considered as function of real variable (<span class="math inline">\(y=0\)</span>) has a perfectly fine limit if <span class="math inline">\(x\to 0\)</span>, which is of course must be zero. Considered as a function of complex variable, <span class="math inline">\(f\)</span> does not have a limit at <span class="math inline">\(z_0=0\)</span>. Indeed, let me take <span class="math display">\[
+\lim_{k\to\infty} f\left(\frac{1}{k}\right)=0,
+\]</span> on the other hand <span class="math display">\[
+\lim_{k\to\infty} f\left(\frac{\I}{k}\right)=1,
+\]</span> and since by approaching the zero with two different sequences I get two different answers it means that limit does not exist at <span class="math inline">\(z_0=0\)</span>.</p>
+</div>
+<p>In general the first definition of the limit of a function at a point (in terms of sequences) is nice to work with when one believes that the limit does not exist (all you need is to come up with two different sequences and show that they yield different limits). On the other hand, to prove the existence of the limit, one usually needs to use the second definition, in terms of neighborhoods. You will see some examples below.</p>
+<p>Note that I excluded the possibility that <span class="math inline">\(z_k=z_0\)</span>. This is done to allow, at least in principle, for the value <span class="math inline">\(f(z_0)\)</span> to be different from <span class="math inline">\(w\)</span>, or even do not exist at all. The most important case, however, is when they coincide. In this case we call <span class="math inline">\(f\)</span> <em>continuous</em> at <span class="math inline">\(z_0\in E\)</span> (again, the case how to define continuity of <span class="math inline">\(f\)</span> on the boundary is more subtle, try to think about it).</p>
+<div class="thm definition style-plain" id="definition-4-5"><p><span class="thm-head">Definition 4.5.</span> Let <span class="math inline">\(E\subseteq \C\)</span> be an open set. <span class="math inline">\(f\colon E\longrightarrow \C\)</span> is called continuous at <span class="math inline">\(z_0\in E\)</span> if <span class="math display">\[
+\lim_{z\to z_0}f(z)=f(z_0)=f\left(\lim_{z\to z_0}z\right).
+\]</span> Function <span class="math inline">\(f\)</span> is called continuous on <span class="math inline">\(E\)</span> if it is continuous at every point of <span class="math inline">\(E\)</span>.</p>
+</div>
+<div class="thm example style-definition" id="example-4-6"><p><span class="thm-head">Example 4.6.</span> Let <span class="math inline">\(f\colon \C\longrightarrow \C\)</span> is defined by <span class="math inline">\(f(z)=z\)</span>. Then it is continuous on <span class="math inline">\(\C\)</span>. Here it does not matter which definition of the limit to use, since the conclusion is almost immediate. Indeed, take an arbitrary sequence <span class="math inline">\(z_k\to z_0\)</span>. I have that the sequence <span class="math inline">\(f(z_k)=z_k\to z_0\)</span> as well, and since <span class="math inline">\(f(z_0)=z_0\)</span> the continuity follows.</p>
+</div>
+<div class="thm example style-definition" id="example-4-7"><p><span class="thm-head">Example 4.7.</span> Let <span class="math inline">\(f(z)=|z|\)</span>. I claim that <span class="math inline">\(f\)</span> is continuous on <span class="math inline">\(\C\)</span>. Let me prove it using the second definition of the limit of a function. We need to show that if, for an arbitrary <span class="math inline">\(\varepsilon&gt;0\)</span>, we are smart enough to pick <span class="math inline">\(\delta&gt;0\)</span> such that if <span class="math inline">\(0&lt;|z-z_0|&lt;\delta\)</span> then <span class="math inline">\(|f(z)-f(z_0)|&lt;\varepsilon\)</span>. This exactly means continuity.</p>
+<p>Indeed, for an arbitrary <span class="math inline">\(\varepsilon&gt;0\)</span> take <span class="math inline">\(\delta=\varepsilon\)</span>. Then (using one of the inequalities we proved before) <span class="math display">\[
+|f(z)-f(z_0)|=\bigl||z|-|z_0|\bigr|\leq|z-z_0|&lt;\varepsilon
+\]</span> as needed and we are done.</p>
+</div>
+<div class="thm exercise style-definition" id="exercise-2"><p><span class="thm-head">Exercise 2.</span> To practice the definition, prove that <span class="math inline">\(f(z)=\bar{z}\)</span> is continuous on <span class="math inline">\(\C\)</span>.</p>
+</div>
+<div class="thm exercise style-definition" id="exercise-3"><p><span class="thm-head">Exercise 3.</span> Prove that the function from Example <a href="#ex.1">4.4</a> is not continuous.</p>
+</div>
+<p>As usual, the properties of the limits imply (almost immediately) that the sum, difference, product, and ratio of continuous functions are continuous (for the ratio the denominator cannot be zero of course). Moreover, if one is having two functions, <span class="math inline">\(f,g\)</span>, such that <span class="math inline">\(f\)</span> is continuous at <span class="math inline">\(w_0=g(z_0)\)</span> and <span class="math inline">\(g\)</span> is continuous at <span class="math inline">\(z_0\)</span> then the function composition <span class="math inline">\((f\circ g)(z_0)=f(g(z_0))\)</span> is continuous at <span class="math inline">\(z_0\)</span>. According to the chosen philosophy of the class, I will skip the proofs of these facts.</p>
+<div class="thm remark style-definition" id="remark-4-8"><p><span class="thm-head">Remark 4.8.</span> Strictly speaking, I cannot (yet) talk about the continuity of the distance function <span class="math inline">\(d(z,w)=|z-w|\)</span> since it is a function of two variables, and my definition works only for one variable, but it should be clear, since the distance function is a composition of very basic continuous functions, it is continuous. Remember it, very often the fact that we can push the limits inside the metric function helps with a lot of proofs.</p>
+</div>
+<p>Now to the differentiability.</p>
+<div class="thm definition style-plain" id="definition-4-9"><p><span class="thm-head">Definition 4.9.</span> Let <span class="math inline">\(E\subseteq \C\)</span> be an open set. Function <span class="math inline">\(f\colon E\longrightarrow\C\)</span> is called <em>(</em>complex<em>)</em> differentiable at <span class="math inline">\(z_0\in E\)</span> if <span class="math display">\[
+\lim_{h\to 0}\frac{f(z_0+h)-f(z_0)}{h}=\lim_{z\to z_0}\frac{f(z)-f(z_0)}{z-z_0}
+\]</span> exists and finite. Of course, I denote this limit <span class="math inline">\(f'(z_0)\)</span>.</p>
+</div>
+<p>Since the notion of differentiability is defined in terms of a limit, it should be clear that being <em>complex</em> differentiable is much more restrictive property than being <em>real</em> differentiable. If the reasons are unclear, keep in mind that <span class="math inline">\(h\)</span> is a complex variable here, which can approach the origin on the complex plane in many different ways. Each such way has to lead to the same answer, only in this case the function will be differentiable at the point <span class="math inline">\(z_0\)</span>.</p>
+<div class="thm example style-definition" id="ex.2"><p><span class="thm-head">Example 4.10.</span> Consider <span class="math display">\[
+f(z)=x+y+\I xy,\quad z_0=0.
+\]</span> This function is not differentiable at <span class="math inline">\(z_0=0\)</span> since, using notation <span class="math inline">\(z_0+h=z=x+\I y\)</span> I have <span class="math display">\[
+\frac{f(z)-f(z_0)}{z-z_0}=\frac{x+y+\I xy}{x+\I y}\,,
+\]</span> and the last fraction tends to 1 if <span class="math inline">\(y=0\)</span> and to <span class="math inline">\(-\I\)</span> if <span class="math inline">\(x=0\)</span>, therefore the sought limit does not exist.</p>
+</div>
+<div class="thm exercise style-definition" id="exercise-4"><p><span class="thm-head">Exercise 4.</span> Show that the function in Example <a href="#ex.2">4.10</a> is continuous at <span class="math inline">\(z_0=0\)</span>.</p>
+</div>
+<p>The previous example shows that a continuous function can be not differentiable at the same point. The converse is always true.</p>
+<div class="thm proposition style-plain" id="pr4:1"><p><span class="thm-head">Proposition 4.11.</span> If <span class="math inline">\(f\)</span> is differentiable at <span class="math inline">\(z=z_0\)</span> then it is continuous at this point.</p>
+</div>
+<div class="proof"><p><span class="thm-head">Proof.</span> All we need is to show that if <span class="math inline">\(f\)</span> differentiable at <span class="math inline">\(z_0\)</span> then <span class="math inline">\(|f(z)-f(z_0)|\to 0\)</span> as <span class="math inline">\(z\to z_0\)</span>.</p>
+<p>Indeed, <span class="math display">\begin{align*}
+\lim_{z\to z_0}|f(z)-f(z_0)|&amp;=\lim_{z\to z_0}|f(z)-f(z_0)|\left(\frac{|z-z_0|}{|z-z_0|}\right)=\\
+&amp;=\lim_{z\to z_0}\frac{|f(z)-f(z_0)|}{|z-z_0|}\lim_{z\to z_0}|z-z_0|=\\
+&amp;=|f'(z_0)|\cdot 0=0
+\end{align*}</span> as needed (keep track of all the properties I used in this proof). <span class="qed">&#9632;</span></p></div>
+<p>While the previous proof is sleek and as elementary as possible, for the future reference let me give a different, more important theoretically, proof of the same fact.</p>
+<div class="proof"><p><span class="thm-head">Another proof of Proposition <a href="#pr4:1">4.11</a>.</span> First, if <span class="math inline">\(f\)</span> is differentiable at <span class="math inline">\(z=z_0\)</span> then <span class="math display">\begin{equation}\label{eq4:3}
+f(z)=f(z_0)+f'(z_0)(z-z_0)+\phi(z,z_0)(z-z_0),
+\end{equation}</span> where <span class="math inline">\(\phi(z,z_0)\to 0\)</span> as <span class="math inline">\(z\to z_0\)</span>. Indeed, the definition of the derivative implies that <span class="math display">\[
+\left|\frac{f(z)-f(z_0)}{z-z_0}-f'(z_0)\right|&lt;\varepsilon,
+\]</span> which literally means that <span class="math display">\[
+\frac{f(z)-f(z_0)}{z-z_0}-f'(z_0)=\phi(z,z_0),
+\]</span> where <span class="math inline">\(\phi(z,z_0)\to 0\)</span> as <span class="math inline">\(z\to z_0\)</span> since <span class="math inline">\(\varepsilon\)</span> is arbitrarily small. Multiplying by <span class="math inline">\((z-z_0)\)</span> leads to <span class="math inline">\(\eqref{eq4:3}\)</span>.</p>
+<p>Now, from <span class="math inline">\(\eqref{eq4:3}\)</span> it follows that <span class="math display">\[
+|f(z)-f(z_0)|\leq |f'(z_0)||z-z_0|+|\phi(z,z_0)||z-z_0|&lt;\varepsilon
+\]</span> since <span class="math inline">\(|f'(z_0)|\)</span> is a constant, <span class="math inline">\(\phi\)</span> approaches 0, and <span class="math inline">\(|z-z_0|\)</span> can be chosen arbitrarily small. Hence <span class="math inline">\(f\)</span> is continuous.</p>
+<p>In addition, note that if <span class="math inline">\(\eqref{eq4:3}\)</span> holds then <span class="math inline">\(f\)</span> is differentiable, so it is an if and only if statement. We will need <span class="math inline">\(\eqref{eq4:3}\)</span> later. <span class="qed">&#9632;</span></p></div>
+<p>Very often the equality <span class="math inline">\(\eqref{eq4:3}\)</span> is written as <span class="math display">\[
+f(z)=f(z_0)+f'(z_0)(z-z_0)+o(z-z_0).
+\]</span> You can write the definition of <span class="math inline">\(o(z-z_0)\)</span> (reads “o little”) by comparing the last formula with <span class="math inline">\(\eqref{eq4:3}\)</span>. This is an example of an asymptotic expression.</p>
+<p>Since the definition of complex differentiability is verbatim the same as the definition of differentiability of a real valued function it implies that the usual rules hold. Namely,</p>
+<div class="thm proposition style-plain" id="proposition-4-12"><p><span class="thm-head">Proposition 4.12.</span> Assume that <span class="math inline">\(f,g\)</span> are differentiable at <span class="math inline">\(z=z_0\)</span> then <span class="math display">\begin{align*}
+(f\pm g)'(z_0)&amp;=f'(z_0)\pm g'(z_0),\\
+(fg)'(z_0)&amp;=f'(z_0)g(z_0)+f(z_0)g'(z_0),\\
+\left(\frac{f}{g}\right)'(z_0)&amp;=\frac{f'(z_0)g(z_0)-f(z_0)g'(z_0)}{g^2(z_0)}\,,
+\end{align*}</span> and the last formula holds if <span class="math inline">\(g(z_0)\neq 0\)</span>.</p>
+<p>Moreover, assuming that <span class="math inline">\(f\)</span> is differentiable at <span class="math inline">\(w_0=g(z_0)\)</span> and <span class="math inline">\(g\)</span> is differentiable at <span class="math inline">\(z_0\)</span> then the composition <span class="math display">\[
+h(z)=(f\circ g)(z)=f(g(z))
+\]</span> is differentiable at <span class="math inline">\(z_0\)</span> and <em>(</em>chain rule<em>)</em> <span class="math display">\[
+h'(z_0)=f'(w_0)g'(z_0)=f'(g(z_0))g'(z_0).
+\]</span></p>
+</div>
+<p>Very often we replace our point <span class="math inline">\(z_0\)</span> at which the derivative is taken with writing simply <span class="math inline">\(f'(z)\)</span> or <span class="math inline">\(f'\)</span> emphasizing that the derivative is a function of complex variable <span class="math inline">\(z\)</span> itself.</p>
+<div class="thm example style-definition" id="example-4-13"><p><span class="thm-head">Example 4.13.</span> I claim that <span class="math inline">\((z^n)'=nz^{n-1}\)</span> for any <span class="math inline">\(z\)</span> and any integer <span class="math inline">\(n&gt;0\)</span>. Indeed, this formula true by the definition for <span class="math inline">\(n=1\)</span> (check it): <span class="math display">\[
+z'=1.
+\]</span> Now assume that <span class="math inline">\((z^n)'=n z^{n-1}\)</span>. I have <span class="math display">\[
+(z^{n+1})'=(zz^n)'=z'z^n+nz^{n-1}z=(n+1)z^{n}
+\]</span> as required. Therefore I showed that function <span class="math inline">\(z\mapsto z^n\)</span> is differentiable for any <span class="math inline">\(z\in\C\)</span>.</p>
+</div>
+<p>Moreover, using the discussed rules and the given example, I immediately conclude that <em>any</em> polynomial is differentiable on all complex plane <span class="math inline">\(\C\)</span>.</p>
+<p>Finally, the key definition of today’s lecture (and, arguably, the key definition of the whole semester, this is indeed is a big deal, try to contemplate a few seconds).</p>
+<div class="thm definition style-plain" id="definition-4-14"><p><span class="thm-head">Definition 4.14.</span> Let <span class="math inline">\(E\subseteq \C\)</span> be an open non-empty set. Function <span class="math inline">\(f\colon E\longrightarrow \C\)</span> is called holomorphic on <span class="math inline">\(E\)</span> if it is differentiable at every point <span class="math inline">\(z\in E\)</span>.</p>
+</div>
+<p>Sometimes people also say that <span class="math inline">\(f\)</span> is holomorphic at <span class="math inline">\(z=z_0\)</span>. Note that being differentiable at a point is not equivalent to be holomorphic at this point. To be holomorphic at a point means that there exists a neighborhood <span class="math inline">\(B_\varepsilon(z_0)\)</span> such that <span class="math inline">\(f\)</span> is differentiable at <em>every</em> point of this neighborhood. Being holomorphic is more restrictive, there are functions that are differentiable at a point but not holomorphic there, examples will be given in the next lecture.</p>
+<p>One more term, which is good to remember.</p>
+<div class="thm definition style-plain" id="definition-4-15"><p><span class="thm-head">Definition 4.15.</span> A function <span class="math inline">\(f\)</span> that is holomorphic on <span class="math inline">\(\C\)</span> is called entire.</p>
+</div>
+<p>In the example above I showed that <span class="math inline">\(z^n\)</span> is holomorphic on <span class="math inline">\(\C\)</span> and hence <em>entire</em>. Using the rules for the derivatives of sums I conclude that <em>any</em> polynomial is an entire function. Any rational function is a holomorphic function on <span class="math inline">\(E\)</span>, which is the set of all points in complex plane without those at which the denominator of the rational function vanishes.</p>
+<p>In the rest of our course we will be studying various properties of holomorphic functions. Our first task is to derive relatively simple conditions that would allow us to conclude that a function is actually holomorphic on some given <span class="math inline">\(E\)</span>.</p>
+</article>
+<nav class="pager" aria-label="More sections"><a class="prev" href="03.html"><span class="dir">Previous</span><span class="pt"><span class="pnum">3</span> Analysis starts</span></a><a class="next" href="05.html"><span class="dir">Next</span><span class="pt"><span class="pnum">5</span> Holomorphic functions. Cauchy–Riemann equations. Conformal maps</span></a></nav>
+</main>
+</div>
+<a class="to-top" href="#" aria-label="Back to top">&uarr;</a>
+</body>
+</html>

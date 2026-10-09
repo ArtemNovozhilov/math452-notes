@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section 5: Holomorphic functions. Cauchy–Riemann equations. Conformal maps</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,500;1,400;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="style.css">
+<script>
+window.MathJax = {
+  loader: {load: ['[tex]/tagformat']},
+  tex: {
+    packages: {'[+]': ['tagformat']},
+    tags: 'ams',
+    tagformat: {number: (n) => '5.' + n},
+    macros: {
+      Arg: '\\operatorname{Arg}',
+      C: '\\mathbf{C}',
+      D: '\\mathrm{d}',
+      Div: '\\operatorname{div}',
+      E: ['\\expectation\\left(#1\\right)', 1],
+      I: '\\mathrm{i}',
+      Im: '\\mathop{\\mathrm{Im}}\\nolimits',
+      Ind: ['\\,\\mathbf{1}_{#1}', 1],
+      Int: '\\operatorname{int}',
+      N: '\\mathbf{N}',
+      Poi: ['\\poisson\\left(#1\\right)', 1],
+      Pr: ['\\probability\\left\\{#1\\right\\}', 1],
+      R: '\\mathbf{R}',
+      Re: '\\mathop{\\mathrm{Re}}\\nolimits',
+      Tr: '\\operatorname{tr}',
+      V: ['{\\mathbf{#1}}', 1],
+      Var: ['\\,\\mathrm{Var}\\left(#1\\right)', 1],
+      Z: '\\mathbf{Z}',
+      arctanh: '\\operatorname{arctanh}',
+      bd: '\\operatorname{bd}',
+      bs: ['{\\boldsymbol{#1}}', 1],
+      diag: '\\operatorname{diag}',
+      diam: '\\operatorname{diam}',
+      erf: '\\operatorname{erf}',
+      expectation: '\\operatorname{E}',
+      grad: '\\operatorname{grad}',
+      overbar: ['\\mkern 3.5mu\\overline{\\mkern-2mu#1\\mkern-3mu}\\mkern 3.5mu', 1],
+      pdt: '\\partial_t',
+      poisson: '\\operatorname{Poisson}',
+      probability: '\\operatorname{P}',
+      rank: '\\operatorname{rank}',
+      sign: '\\operatorname{sgn}'
+    }
+  }
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
+<script defer src="notes.js"></script>
+</head>
+<body>
+<div class="progress" aria-hidden="true"><span></span></div>
+<header class="topbar">
+  <a class="course-name" href="index.html">Math 452: Complex Analysis</a>
+  <a class="all-sections" href="index.html">All sections</a>
+</header>
+<div class="layout">
+<aside class="sidetoc" aria-label="On this page">
+  <p class="sidetoc-title">Section 5</p>
+  <ol>
+<li><a href="#sec5-1"><span class="tnum">5.1</span><span class="ttl">Cauchy–Riemann equations</span></a></li>
+<li><a href="#sec5-2"><span class="tnum">5.2</span><span class="ttl">Harmonic functions</span></a></li>
+<li><a href="#sec5-3"><span class="tnum">5.3</span><span class="ttl">Geometric meaning of <span class="math inline">\(f'(z)\)</span> and conformal mappings</span></a></li>
+<li class="adv"><a href="#s5:3"><span class="tnum">5.4</span><span class="ttl">More about differentiability</span><span class="opt">optional</span></a></li>
+<li class="adv"><a href="#sec5-5"><span class="tnum">5.5</span><span class="ttl">A glimpse of Wirtinger’s calculus</span><span class="opt">optional</span></a></li>
+  </ol>
+</aside>
+<main>
+<header class="hero">
+  <span class="bignum" aria-hidden="true">5</span>
+  <div class="hero-text">
+    <p class="kicker">Section</p>
+    <h1>Holomorphic functions. Cauchy–Riemann equations. Conformal maps</h1>
+    <p class="byline">Math 452: <em>Complex Analysis</em> by Artem Novozhilov<sup>©</sup><br>e-mail: <a href="mailto:artem.novozhilov@ndsu.edu">artem.novozhilov@ndsu.edu</a>. Spring 2027</p>
+  </div>
+  <svg class="emblem" viewBox="0 0 160 160" aria-hidden="true">
+<line x1="8" y1="80" x2="152" y2="80"/><line x1="80" y1="152" x2="80" y2="8"/>
+<circle cx="80" cy="80" r="48"/>
+<line class="dash" x1="128" y1="80" x2="128" y2="34"/><line class="dash" x1="80" y1="34" x2="128" y2="34"/>
+<line class="ray" x1="80" y1="80" x2="128" y2="34"/>
+<circle class="pt" cx="128" cy="34" r="3.5"/>
+<text x="134" y="30">z</text><text x="138" y="96" class="ax">Re</text><text x="86" y="18" class="ax">Im</text>
+</svg>
+</header>
+<nav class="toc" aria-label="Contents">
+  <p class="toc-title">In this section</p>
+  <ol>
+<li><a href="#sec5-1"><span class="tnum">5.1</span><span class="ttl">Cauchy–Riemann equations</span></a></li>
+<li><a href="#sec5-2"><span class="tnum">5.2</span><span class="ttl">Harmonic functions</span></a></li>
+<li><a href="#sec5-3"><span class="tnum">5.3</span><span class="ttl">Geometric meaning of <span class="math inline">\(f'(z)\)</span> and conformal mappings</span></a></li>
+<li class="adv"><a href="#s5:3"><span class="tnum">5.4</span><span class="ttl">More about differentiability</span><span class="opt">optional</span></a></li>
+<li class="adv"><a href="#sec5-5"><span class="tnum">5.5</span><span class="ttl">A glimpse of Wirtinger’s calculus</span><span class="opt">optional</span></a></li>
+  </ol>
+</nav>
+<article class="notes">
+<p>In the previous lecture I introduced the central notion of our course: <em>holomorphic functions</em>. Recall,</p>
+<div class="thm definition style-plain" id="definition-5-1"><p><span class="thm-head">Definition 5.1.</span> Let <span class="math inline">\(E\subseteq \C\)</span> be an open non-empty set, and let <span class="math inline">\(f\colon E\longrightarrow \C\)</span>. Then <span class="math inline">\(f\)</span> is called holomorphic on <span class="math inline">\(E\)</span> if it is differentiable at every point <span class="math inline">\(z\in E\)</span>.</p>
+</div>
+<p>Why so much emphasis? Because, as I will try to convince you, being holomorphic is much more restrictive than just request that both real and imaginary parts of <span class="math inline">\(f\)</span> are (real) differentiable. For instance, why the discussion about continuity was so short? Because it is true that</p>
+<div class="thm proposition style-plain" id="proposition-5-2"><p><span class="thm-head">Proposition 5.2.</span> Let <span class="math inline">\(E\)</span> be an open set. Then <span class="math inline">\(f(z)=f(x+\I y)=u(x,y)+\I v(x,y)\)</span> is continuous on <span class="math inline">\(E\)</span> if and only if <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> are both continuous on <span class="math inline">\(E\)</span> as real functions of two real variables.</p>
+</div>
+<div class="thm exercise style-definition" id="exercise-1"><p><span class="thm-head">Exercise 1.</span> Prove this proposition.</p>
+</div>
+<p>So, in some sense, while moving into the complex world, we do not gain anything with respect to the notion of continuity compared with our familiar real world of <span class="math inline">\(\R^2\)</span>. It is very different with differentiability!</p>
+<h2 id="sec5-1"><span class="secnum">5.1</span><span class="sectitle">Cauchy–Riemann equations</span></h2>
+<p>It is reasonable to expect, of course, that complex differentiability of <span class="math inline">\(f\)</span> must be connected somehow with differentiability of two real valued functions <span class="math inline">\(u,v\)</span>, which we find “inside” our complex function: <span class="math display">\[
+f(z)=f(x+\I y)=u(x,y)+\I v(x,y).
+\]</span> Let me be very precise here. Recall that differentiability of real functions of several variables is related to existence of its partial derivatives. I will use the usual notation <span class="math display">\[
+\frac{\partial u}{\partial x}(x,y)=u'_x(x,y)=u_x(x,y),
+\]</span> and very often I will write <span class="math inline">\(u'_x\)</span> or <span class="math inline">\(u_x\)</span> if the points at which the partial derivatives are evaluated are clear. Recall that, for instance, by definition <span class="math display">\[
+\frac{\partial u}{\partial x}(x_0,y_0)=\lim_{x\to x_0}\frac{u(x,y_0)-u(x_0,y_0)}{x-x_0}=\lim_{h\to 0}\frac{u(x_0+h,y_0)-u(x_0,y_0)}{h}\,,
+\]</span> i.e., it is the usual derivative of function <span class="math inline">\(u\)</span> with respect to variable <span class="math inline">\(x\)</span> with the assumption that the second variable is held constant. Similar for the second partial derivative.</p>
+<p>This is what one can get almost immediately:</p>
+<div class="thm proposition style-plain" id="pr5:1"><p><span class="thm-head">Proposition 5.3.</span> Assume that <span class="math inline">\(f\colon E\longrightarrow \C\)</span> is differentiable at <span class="math inline">\(E\ni z_0=x_0+\I y_0\)</span>. Then at this point <span class="math inline">\((x_0,y_0)\)</span> there exist partial derivatives <span class="math inline">\(u_x,u_y,v_x,v_y\)</span> and, moreover, they satisfy the Cauchy–Riemann equations <span class="math display">\begin{equation}\label{eq5:1}
+    \frac{\partial u}{\partial x}(x_0,y_0)=\frac{\partial v}{\partial y}(x_0,y_0)\,,\quad \frac{\partial u}{\partial y}(x_0,y_0)=-\frac{\partial v}{\partial x}(x_0,y_0)\,.
+\end{equation}</span></p>
+</div>
+<div class="proof"><p><span class="thm-head">Proof.</span> First I need to show that these partial derivatives exist. By my assumption I have <span class="math display">\[
+\frac{f(z_0+h)-f(z_0)}{h}\to f'(z_0)
+\]</span> for any <span class="math inline">\(h\)</span> that approaches <span class="math inline">\(0\)</span> and hence for real ones. For real <span class="math inline">\(h\)</span>, in more details, <span class="math display">\[
+\frac{u(x_0+h,y_0)-u(x_0,y_0)}{h}+\I \frac{v(x_0+h,y_0)-v(x_0,y_0)}{h}\to f'(z_0).
+\]</span> Since this limit exists, it implies that for both real and imaginary parts the corresponding limits exist (we had this exercise before) but these limits by definition are exactly <span class="math inline">\(u_x\)</span> and <span class="math inline">\(v_x\)</span> at <span class="math inline">\((x_0,y_0)\)</span> and I proved the existence of partial derivatives with respect to <span class="math inline">\(x\)</span>. Similarly, assuming that <span class="math inline">\(h\)</span> is purely imaginary, I can show that both <span class="math inline">\(u_y\)</span> and <span class="math inline">\(v_y\)</span> exist (fill in the details).</p>
+<p>Now I will differentiate <span class="math inline">\(f\)</span> with respect to <span class="math inline">\(x\)</span> using the chain rule: <span class="math display">\[
+\frac{\partial f}{\partial x}(z_0)=f'(z_0)\frac{\partial z}{\partial x}=f'(z_0).
+\]</span> From direct differentiation I also get that <span class="math display">\[
+\frac{\partial f}{\partial x}(z_0)=u_x(x_0,y_0)+\I v_x(x_0,y_0).
+\]</span> Similarly, <span class="math display">\[
+\frac{\partial f}{\partial y}(z_0)=f'(z_0)\frac{\partial z}{\partial y}=\I f'(z_0)=u_y(x_0,y_0)+\I v_y(x_0,y_0).
+\]</span> After multiplying the last equality by <span class="math inline">\(-\I\)</span> I must conclude that <span class="math display">\[u_x+\I v_x=v_y-\I u_y,
+\]</span> at <span class="math inline">\((x_0,y_0)\)</span> or <span class="math inline">\(\eqref{eq5:1}\)</span> as required. <span class="qed">&#9632;</span></p></div>
+<p>It would be great to have the converse statement, but in general the converse is not true (see the homework problems), i.e., the existence of partial derivatives that satisfy <span class="math inline">\(\eqref{eq5:1}\)</span> is not enough to conclude the differentiability of <span class="math inline">\(f\)</span>. Something else is required. It can be proved (I will skip a proof here since it is more about real differentiability) that</p>
+<div class="thm proposition style-plain" id="pr5:2"><p><span class="thm-head">Proposition 5.4.</span> Assume that <span class="math inline">\(u_x,u_y,v_x,v_y\)</span> exist, satisfy <span class="math inline">\(\eqref{eq5:1}\)</span>, and continuous at <span class="math inline">\(z_0\)</span>. Then <span class="math inline">\(f=u+\I v\)</span> is differentiable at <span class="math inline">\(z_0\)</span>.</p>
+</div>
+<p>For a little headache: the converse statement to this proposition is also false in general! So it is only a sufficient condition for differentiability at a point.</p>
+<p>To show that holomorphic functions are “nice,” I state one more result, the proof of which will be given later. Recall that now I am talking about differentiability on a set, not at a single point.</p>
+<div class="thm proposition style-plain" id="proposition-5-5"><p><span class="thm-head">Proposition 5.5.</span> Let <span class="math inline">\(E\subseteq \C\)</span> be an open set, and <span class="math inline">\(f\colon E\longrightarrow \C\)</span>. Then <span class="math inline">\(f\)</span> is holomorphic on <span class="math inline">\(E\)</span> if and only if <span class="math inline">\(u_x,u_y,v_x,v_y\)</span> exist, continuous, and satisfy <span class="math inline">\(\eqref{eq5:1}\)</span> on <span class="math inline">\(E\)</span>.</p>
+</div>
+<div class="thm example style-definition" id="example-5-6"><p><span class="thm-head">Example 5.6.</span> We already know that <span class="math inline">\(f(z)=z^2\)</span> is entire. Not surprisingly, for <span class="math display">\[
+u(x,y)=x^2-y^2,\quad v(x,y)=2xy,
+\]</span> <span class="math inline">\(\eqref{eq5:1}\)</span> hold at every point of <span class="math inline">\(\C\)</span>.</p>
+</div>
+<div class="thm example style-definition" id="example-5-7"><p><span class="thm-head">Example 5.7.</span> Let <span class="math inline">\(f(z)=\bar z^2\)</span>. Then <span class="math display">\[
+u(x,y)=x^2-y^2,\quad v(x,y)=-2 xy,
+\]</span> and <span class="math inline">\(\eqref{eq5:1}\)</span> hold only at <span class="math inline">\(x=y=0\)</span>. Hence I can conclude that my <span class="math inline">\(f\)</span> is not differentiable (and hence not holomorphic) at any point <span class="math inline">\((x,y)\neq (0,0)\)</span>, and, by Proposition <a href="#pr5:2">5.4</a>, it is differentiable (but still not holomorphic) at the origin.</p>
+</div>
+<p>Here is our first theoretical (quite natural) result that uses Cauchy–Riemann equations <span class="math inline">\(\eqref{eq5:1}\)</span>.</p>
+<div class="thm proposition style-plain" id="proposition-5-8"><p><span class="thm-head">Proposition 5.8.</span> Let <span class="math inline">\(E\)</span> be a region, <span class="math inline">\(f\colon E\longrightarrow\C\)</span> be holomorphic on <span class="math inline">\(E\)</span>, and <span class="math inline">\(f'(z)=0\)</span> for all <span class="math inline">\(z\in E\)</span>. Then <span class="math inline">\(f\)</span> must be constant.</p>
+</div>
+<div class="proof"><p><span class="thm-head">Proof.</span> Since <span class="math inline">\(f\)</span> is assumed to be holomorphic, we have that Cauchy–Riemann equations hold at each point of <span class="math inline">\(E\)</span> and moreover <span class="math display">\[
+u_x=u_y=v_x=v_y=0.
+\]</span> This implies (by the mean value theorem for real functions) that both real functions <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> must be constant: <span class="math inline">\(u(x,y)=A,v(x,y)=B\)</span>. Therefore, <span class="math display">\[
+f(z)=A+\I B=C\in \C
+\]</span> as expected. <span class="qed">&#9632;</span></p></div>
+<div class="thm remark style-definition" id="remark-5-9"><p><span class="thm-head">Remark 5.9.</span> Recall the definition of a region. The requirement that <span class="math inline">\(E\)</span> is connected is essential here. It is easy to come up with a non-constant on disconnected set <span class="math inline">\(E\)</span> function, whose derivative is however zero at every point.</p>
+</div>
+<h2 id="sec5-2"><span class="secnum">5.2</span><span class="sectitle">Harmonic functions</span></h2>
+<p>Very briefly, let me mention the connection of the holomorphic functions with harmonic ones. Note that equations <span class="math inline">\(\eqref{eq5:1}\)</span> have a lot of symmetry. In particular, assume for a second that <span class="math inline">\(u,v\)</span> have not only first partial derivatives, but also the second partial derivatives, which I assume to be continuous. Then I am allowed to differentiate both equations in <span class="math inline">\(\eqref{eq5:1}\)</span>. Taking the derivative with respect to <span class="math inline">\(x\)</span> from the first equality I will find that <span class="math display">\[
+u_{xx}=v_{yx},
+\]</span> and differentiating the second equality with respect to <span class="math inline">\(y\)</span> I get <span class="math display">\[
+u_{yy}=-v_{xy}.
+\]</span> By my assumption (continuity of the second partial derivatives), <span class="math inline">\(v_{xy}=v_{yx}\)</span> and hence <span class="math display">\[
+u_{xx}+u_{yy}=0.
+\]</span> Similarly I can find that <span class="math display">\[
+v_{xx}+v_{yy}=0.
+\]</span> This is one of the most important equations in mathematics (and especially in mathematical physics), which is called <em>Laplace equation</em> (to be precise, this is two dimensional Laplace equation, can you solve one dimensional one?). Any solution to the Laplace equation is called a <em>harmonic</em> function. Two harmonic functions that are connected by the Cauchy–Riemann equations <span class="math inline">\(\eqref{eq5:1}\)</span> are called <em>harmonic conjugate</em>. We cannot prove it yet, but I would like to state that <span class="math inline">\(f\colon E\longrightarrow \C\)</span> is holomorphic on <span class="math inline">\(E\)</span> if and only if both <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> are harmonic conjugates.</p>
+<p>If <span class="math inline">\(E\)</span> is simply connected (no holes!) and we know one of the harmonic conjugate, the second one can always be found as well. The easiest way to show this is by an example (and I also hope that you will have some useful recollections from Calc III and Intro to ODE).</p>
+<div class="thm example style-definition" id="example-5-10"><p><span class="thm-head">Example 5.10.</span> Let <span class="math display">\[
+u(x,y)=2 e^x\cos y
+\]</span> be known. It is easy to check that <span class="math inline">\(u_{xx}+u_{yy}=0\)</span>, i.e., <span class="math inline">\(u\)</span> is harmonic. What is its harmonic conjugate on <span class="math inline">\(\C\)</span>?</p>
+<p>I have <span class="math display">\[
+\frac{\partial u}{\partial x}=2 e^x\cos y=\eqref{eq5:1}=\frac{\partial v}{\partial y}\implies v(x,y)=\int 2 e^x\cos y\,\D y=2 e^x \sin y+\varphi(x).
+\]</span> Moreover, <span class="math display">\[
+\frac{\partial v}{\partial x}=2 e^{x}\sin y+\varphi'(x)=\eqref{eq5:1}= -\frac{\partial u}{\partial y}=2 e^x\sin y\implies \varphi'(x)=0\implies \varphi(x)=C.
+\]</span> If we fix one value of our <span class="math inline">\(f\)</span>, e.g., <span class="math inline">\(f(0)=2\)</span>, we can uniquely determine <span class="math display">\[
+f(z)=f(x+\I y)=2 e^{x}\cos y+2 \I e^{x}\sin y.
+\]</span> Otherwise, the harmonic conjugate is determined up to a constant.</p>
+</div>
+<h2 id="sec5-3"><span class="secnum">5.3</span><span class="sectitle">Geometric meaning of <span class="math inline">\(f'(z)\)</span> and conformal mappings</span></h2>
+<p>Recall that one possible geometric interpretation of <span class="math inline">\(f\colon E\longrightarrow \C\)</span> is a map from one plane, say <span class="math inline">\(z=x+\I y\)</span>, to another plane, <span class="math inline">\(w=u+\I v\)</span>. Here I will show the first very special property of holomorphic functions.</p>
+<p>First, let us forget about <span class="math inline">\(f\)</span> for a second and just assume that we have a pair of real valued functions, <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span>, that map the plane <span class="math inline">\((x,y)\)</span> to the plane <span class="math inline">\((u,v)\)</span>. I start with a point <span class="math inline">\(M\)</span> in plane <span class="math inline">\(z\)</span> and a ray from this point that makes angle <span class="math inline">\(\theta\)</span> with the real axis. In plane <span class="math inline">\((u,v)\)</span> I will have point <span class="math inline">\(M^\ast=f(M)\)</span> and a curve to which this ray is being mapped (I assume here that <span class="math inline">\(u,v\)</span> do not map the plane <span class="math inline">\((x,y)\)</span> to a point, or, in other words, <span class="math inline">\(u_x,u_y,v_x,v_y\)</span> are not zero simultaneously). Let <span class="math inline">\(N\)</span> be a point on my ray at distance <span class="math inline">\(\rho\)</span> from <span class="math inline">\(M\)</span> and <span class="math inline">\(N^\ast\)</span> be its image under <span class="math inline">\(f\)</span>, <span class="math inline">\(N^\ast=f(N)\)</span>. Consider the ratio of the corresponding distances <span class="math display">\[
+\frac{M^\ast N^\ast}{MN}=\frac{1}{\rho}\sqrt{(u(x+\rho\cos \theta,y+\rho\sin\theta)-u(x,y))^2+(v(x+\rho\cos \theta,y+\rho\sin\theta)-v(x,y))^2}\,.
+\]</span></p>
+<p>Now I take the limit <span class="math inline">\(\rho\to 0\)</span> assuming that <span class="math inline">\(u,v\)</span> are differentiable. In this case I am allowed to use l’Hôpital’s rule, which yields <span class="math display">\[
+\lambda=\lim_{\rho\to 0}\frac{M^\ast N^\ast}{MN}=\sqrt{(u_x \cos\theta+u_y\sin\theta)^2+(v_x \cos\theta+v_y\sin\theta)^2}\,.
+\]</span></p>
+<p>Quantity <span class="math inline">\(\lambda\)</span> is called <em>linear magnification ratio</em> at point <span class="math inline">\(M\)</span> along the given ray <span class="math inline">\(MN\)</span>. Let us ask the following question: When does <span class="math inline">\(\lambda\)</span> not depend on <span class="math inline">\(\theta\)</span>? Rewriting <span class="math display">\[
+\lambda^2=A\cos^2\theta+2B\cos\theta\sin\theta+C\sin^2\theta,
+\]</span> where <span class="math display">\[
+A=(u_x)^2+(v_x)^2,\quad B=u_xu_y+v_xv_y,\quad C=(u_y)^2+(v_y)^2,
+\]</span> I obtain that <span class="math inline">\(\lambda\)</span> does not depend on <span class="math inline">\(\theta\)</span> if and only if <span class="math display">\[
+A=C,\quad B=0.
+\]</span></p>
+<div class="thm exercise style-definition" id="exercise-2"><p><span class="thm-head">Exercise 2.</span> Fill in the details in the statement above. I.e., prove that <span class="math inline">\(\lambda\)</span> does not depend on <span class="math inline">\(\theta\)</span> if and only if <span class="math display">\begin{equation}\label{eq5:2}
+u_x^2+v_x^2=u_y^2+v_y^2,\quad u_xu_y+v_xv_y=0.
+\end{equation}</span></p>
+</div>
+<p>Now let me calculate the angle between <span class="math inline">\(MN\)</span> and <span class="math inline">\(M^\ast N^\ast\)</span>. For <span class="math inline">\(MN\)</span> I have <span class="math display">\[
+\mu=\tan \theta,
+\]</span> for <span class="math inline">\(M^\ast N^\ast\)</span> it is <span class="math display">\[
+\frac{v(x+\rho\cos \theta,y+\rho\sin\theta)-v(x,y)}{u(x+\rho\cos \theta,y+\rho\sin\theta)-u(x,y)}\,,
+\]</span> which tends to <span class="math display">\[
+\tan \varphi=\nu=\frac{v_x\cos \theta+v_y\sin \theta}{u_x\cos \theta+u_y\sin \theta}=\frac{v_x+v_y\mu}{u_x+u_y\mu}\,,
+\]</span> as <span class="math inline">\(\rho\to 0\)</span>.</p>
+<p>Now (using a trigonometric formula for <span class="math inline">\(\tan(\varphi-\theta)\)</span>) <span class="math display">\[
+\xi=\tan \zeta=\tan(\varphi-\theta)=\frac{\nu-\mu}{1+\nu\mu}=\frac{v_x+(v_y-u_x)\mu-u_y\mu^2}{u_x+(u_y+v_x)\mu+v_y\mu^2}\,.
+\]</span> <span class="math inline">\(\zeta\)</span> is called the <em>rotation</em> of the map at point <span class="math inline">\(M\)</span> with respect to the given ray. Again, this rotation depends on both the coordinates <span class="math inline">\((x,y)\)</span> of <span class="math inline">\(M\)</span> and the chosen angle <span class="math inline">\(\theta\)</span>. Let us ask again the same question: When does the rotation at <span class="math inline">\(M\)</span> not depend on <span class="math inline">\(\theta\)</span>?</p>
+<p>Looking at the last expression for <span class="math inline">\(\xi\)</span> I conclude that rotation at <span class="math inline">\(M\)</span> will not depend on <span class="math inline">\(\theta\)</span> if and only if <span class="math display">\begin{equation}\label{eq5:3}
+v'_x=\xi u'_x,\quad (v'_y-u_x')=\xi(u'_y+v'_x),\quad -u'_y=\xi v'_y,
+\end{equation}</span> where <span class="math inline">\(\xi\)</span> does not depend on <span class="math inline">\(\theta\)</span>.</p>
+<p>Now to the main definition.</p>
+<div class="thm definition style-plain" id="definition-5-11"><p><span class="thm-head">Definition 5.11.</span> Map <span class="math inline">\((x,y)\mapsto \bigl(u(x,y),v(x,y)\bigr)\)</span> is called conformal at <span class="math inline">\(M\in E\)</span> if both magnification and rotation do not depend on the direction <span class="math inline">\(\theta\)</span>. It is called conformal on region <span class="math inline">\(E\)</span> if it is conformal at every point of <span class="math inline">\(E\)</span></p>
+</div>
+<p>Why do we care at all? Recall from elementary geometry that we call figures <em>similar</em> if the corresponding angles are the same, and the corresponding sides are proportional to each other with the same coefficient of proportionality. Note the first corresponds to the invariance of rotation with respect to the given direction (indeed, if I now have two ray emanating out of the same point, and rotation does not depend on the chosen direction, they both will be rotated by the same angle) and the second one corresponds to the invariance of magnification with respect to given direction. In other words, conformal maps generalize the notion of similarity in a small neighborhood of the given point. This is sometimes quite important and historically was necessary when one tries to present a map of a sufficiently big part of the Earth (which is <em>almost</em> a sphere) on a plane. Very often some maps are required to be conformal.</p>
+<p>Almost immediately, I have</p>
+<div class="thm proposition style-plain" id="proposition-5-12"><p><span class="thm-head">Proposition 5.12.</span> Let <span class="math inline">\(f\colon E\longrightarrow \C\)</span> be holomorphic on <span class="math inline">\(E\)</span>. Then <span class="math inline">\(f\)</span> is conformal at every point <span class="math inline">\(z\)</span> where <span class="math inline">\(f'(z)\neq 0\)</span>.</p>
+</div>
+<div class="proof"><p><span class="thm-head">Proof.</span> Using <span class="math inline">\(\eqref{eq5:1}\)</span>, I have that both <span class="math inline">\(\eqref{eq5:2}\)</span> and <span class="math inline">\(\eqref{eq5:3}\)</span> hold, which concludes the proof. <span class="qed">&#9632;</span></p></div>
+<p>More interesting is the converse question. Namely, if one assumes that <span class="math inline">\(f=u+\I v\)</span> is a conformal map, can we say anything about <span class="math inline">\(f\)</span>? The answer is yes. Skipping technical details (not complicated but left as an exercise), I state</p>
+<div class="thm proposition style-plain" id="proposition-5-13"><p><span class="thm-head">Proposition 5.13.</span> Let <span class="math inline">\(\eqref{eq5:3}\)</span> hold. Then it implies that <span class="math inline">\(\eqref{eq5:1}\)</span> must hold.</p>
+<p>Let <span class="math inline">\(\eqref{eq5:2}\)</span> hold. Then it implies that either <span class="math inline">\(\eqref{eq5:1}\)</span> holds or <span class="math display">\[
+u_x=-v_y,\quad u_y=v_x.
+\]</span></p>
+</div>
+<p>According to the last proposition, we are almost there. One thing to notice is that the second pair of conditions that are consequences of the invariance of magnification imply that in the complex world we deal with the maps of the form <span class="math inline">\(w=f(\bar z)\)</span>, where <span class="math inline">\(f\)</span> is holomorphic (think this out!). Such maps keep the magnification ratio but in addition to the conformal map that is performed by <span class="math inline">\(f\)</span> it adds also a reflection with respect to the <span class="math inline">\(x\)</span>-axis (recall the geometric meaning of complex conjugation) and hence do not keep the rotation invariant (they change the orientation). They do, however, keep the angles between two curves the same, and for this reason often called <em>anticonformal</em> or <em>conformal</em> maps of the second kind.</p>
+<p>Hence, to make it official,</p>
+<div class="thm corollary style-plain" id="corollary-5-14"><p><span class="thm-head">Corollary 5.14.</span> Let <span class="math inline">\(E\)</span> be a domain, and <span class="math inline">\(f\colon E\longrightarrow \C\)</span> be given. Then <span class="math inline">\(f\)</span> is holomorphic on <span class="math inline">\(E\)</span> if and only if the corresponding map <span class="math inline">\((x,y)\mapsto (u(x,y),v(x,y))\)</span> is conformal at all points <span class="math inline">\(E\)</span> <em>(</em>except for those where all four partial derivatives <span class="math inline">\(u_x,v_x,u_y,v_y\)</span> are zero.<em>)</em></p>
+</div>
+<div class="thm exercise style-definition" id="exercise-3"><p><span class="thm-head">Exercise 3.</span> Consider the function <span class="math inline">\(f(z)=z^2\)</span>. It is conformal anywhere in <span class="math inline">\(\C\setminus\{0\}\)</span>. Show directly that this function, considered as a map from one plane to another, is not conformal at <span class="math inline">\(0\)</span>.</p>
+</div>
+<p>Now we can state the geometric meaning of complex derivative. Assume that <span class="math inline">\(f\)</span> is holomorphic on <span class="math inline">\(E\)</span>. Hence I have (we already know that it does not depend on the direction <span class="math inline">\(\theta\)</span>, hence I can take, e.g., <span class="math inline">\(\theta=0\)</span>, and I also use the fact that <span class="math inline">\(f'(z)=u_x+\I v_x\)</span>) <span class="math display">\begin{align*}
+\lambda&amp;=\sqrt{(u'_x)^2+(v'_x)^2}=|f'(z)|,\\
+\xi&amp;=\frac{v_x}{u_x}\implies \zeta =\Arg f'(z),
+\end{align*}</span> or in words, the modulus of the derivative geometrically is the linear magnification ratio at this point, and the argument of the derivative (assuming <span class="math inline">\(f'(z)\neq 0\)</span>) is the rotation at the same point.</p>
+<div class="thm remark style-definition" id="remark-5-15"><p><span class="thm-head">Remark 5.15.</span> The last conclusion could be obtained much simpler, but in this case we would not get the full characterization of conformal maps.</p>
+<p>Indeed, using the definition of the derivative, I have <span class="math display">\[
+\lim_{\Delta z\to 0}\left|\frac{\Delta w}{\Delta z}\right|=|w'|,
+\]</span> which is exactly what we found since <span class="math inline">\(|\Delta w|\)</span> is the length of the interval in the <span class="math inline">\(w\)</span> plane, and <span class="math inline">\(|\Delta z|\)</span> is the length of the interval in the <span class="math inline">\(z\)</span> plane, and, by the definition of the derivative, the direction is not important.</p>
+<p>Moreover, <span class="math display">\[
+\lim_{\Delta z\to 0}\Arg\frac{\Delta w}{\Delta z}=\lim_{\Delta z\to 0}(\Arg \Delta w-\Arg \Delta z)=\Arg w',
+\]</span> which exactly means that <span class="math inline">\(\arg w'\)</span> is the angle by which the interval in <span class="math inline">\(z\)</span> plane is rotated to get the image interval in <span class="math inline">\(w\)</span> plane.</p>
+</div>
+<div class="thm example style-definition" id="example-5-16"><p><span class="thm-head">Example 5.16.</span> Jumping a little ahead let me take <span class="math display">\[
+f(z)=\frac 1z\,.
+\]</span> Since, as expected, <span class="math display">\[
+\left(\frac 1z\right)'=-\frac {1}{z^2}\,,
+\]</span> then <span class="math display">\[
+|f'(z)|=\frac{1}{r^2}\,,\quad \Arg f'(z)=\Arg(-1)-\Arg(z^2)=\pi -2 \Arg z,
+\]</span> which indicates that figures close to the origin are magnified by the action of <span class="math inline">\(f\)</span>, far from the origin — reduced.</p>
+</div>
+<div class="advanced"><p class="adv-note">Optional material</p>
+<h2 id="s5:3"><span class="secnum">*5.4</span><span class="sectitle">More about differentiability</span></h2>
+<p>The situation with Propositions <a href="#pr5:1">5.3</a> and <a href="#pr5:2">5.4</a> is not very satisfactory from a mathematical standpoint, and it would be desirable to have a clearer connection between the complex differentiability of <span class="math inline">\(f\)</span> and real differentiability of its two real components <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span>. In this optional section I will try to provide a few extra details. For this let me recall what it means for a function <span class="math inline">\(f\colon E\longrightarrow \R^2\)</span> to be (real) differentiable (this generalizes immediately to any number of dimensions, or even to arbitrary Banach spaces if you know this word, it is called <em>Fréchet differentiability</em>). We say that <span class="math inline">\(f\)</span> is (Fréchet) differentiable at the point <span class="math inline">\(z\in E\)</span> if <span class="math display">\[
+f(z+h)=f(z)+Ah+\phi(h)h,
+\]</span> as <span class="math inline">\(h\to 0\)</span>, where <span class="math inline">\(A\colon \R^2\longrightarrow \R^2\)</span> is a (real) linear map and <span class="math inline">\(\phi(h)\to 0\)</span> as <span class="math inline">\(h\to 0\)</span>. Recall that <span class="math inline">\(A\)</span> is real linear if <span class="math inline">\(A(\alpha z+w)=\alpha Az+Aw\)</span> for all <em>real</em> <span class="math inline">\(\alpha\)</span>. Of course we can consider <span class="math inline">\(\R^2=\C\)</span> as a complex vector space, and <span class="math inline">\(A\)</span> will be complex linear if <span class="math inline">\(A(\alpha z+w)=\alpha Az+Aw\)</span> for all complex <span class="math inline">\(\alpha\)</span>. It is almost immediate to conclude that the only complex linear maps on <span class="math inline">\(\C\)</span> are <span class="math inline">\(c z\)</span> for <span class="math inline">\(c\in \C\)</span>. It implies that <span class="math inline">\(f\)</span> is complex differentiable if and only if it is real differentiable and its real derivative <span class="math inline">\(A\)</span> is complex linear. This sounds complicated, so let me simplify it further, but for this I will need to bring in a few extra facts.</p>
+<p>From real analysis it is known that if <span class="math inline">\(f\)</span> is real differentiable then its derivative is given by its Jacobi matrix <span class="math display">\[
+A=\begin{bmatrix}
+    u_x &amp; u_y \\
+    v_x &amp; v_y \\
+  \end{bmatrix}.
+\]</span> From one of the previous lectures we know that multiplication by complex number <span class="math inline">\(c=a+\I b\)</span> can be represented by <span class="math inline">\(2\times 2\)</span> matrix <span class="math display">\[
+\begin{bmatrix}
+    a &amp; -b \\
+    b &amp; a \\
+  \end{bmatrix},
+\]</span> and hence we obtain</p>
+<div class="thm proposition style-plain" id="proposition-5-17"><p><span class="thm-head">Proposition 5.17.</span> <span class="math inline">\(f\colon E\longrightarrow \C\)</span> is holomorphic on <span class="math inline">\(E\)</span> if and only if it is real differentiable on <span class="math inline">\(E\)</span>, and the real and imaginary parts of <span class="math inline">\(f\)</span> satisfy the Cauchy–Riemann equations <span class="math display">\[
+u_x=v_y,\quad u_y=-v_x
+\]</span> on <span class="math inline">\(E\)</span>.</p>
+</div>
+<p>Can one do better? And the answer is yes!</p>
+<p>Since the details become more and more subtle, I would like just to state that it is true that</p>
+<div class="thm proposition style-plain" id="proposition-5-18"><p><span class="thm-head">Proposition 5.18 (Looman–Menchoff theorem).</span> A continuous <span class="math inline">\(f\colon E\longrightarrow \C\)</span> is holomorphic on <span class="math inline">\(E\)</span> if and only if it satisfies Cauchy–Riemann equations on <span class="math inline">\(E\)</span>.</p>
+</div>
+<p>If the reader wants to really dive into this particular discussion, for further study I recommend Gray, J. D., and S. A. Morris. “When is a function that satisfies the Cauchy–Riemann equations analytic?” The American Mathematical Monthly 85.4 (1978): 246–256.</p>
+<h2 id="sec5-5"><span class="secnum">*5.5</span><span class="sectitle">A glimpse of Wirtinger’s calculus</span></h2>
+<p>Cauchy–Riemann equations can be written in a different way. Without going into many details, I would like just to mention it, since in some sense it looks much cleaner (although one should be careful while using the introduced below operators).</p>
+<p>Let <span class="math inline">\(f\)</span> be complex valued function considered as a function of two real variables <span class="math inline">\(x,y\)</span>. Then, as we learn in real analysis, its differential, <span class="math inline">\(\D f\)</span>, is given by <span class="math display">\[
+\D f=\frac{\partial f}{\partial x}\D x+\frac{\partial f}{\partial y}\D y.
+\]</span> In particular, I have <span class="math display">\[
+\D z=\D x+\I \D y,\quad \D \bar z=\D x-\I \D y.
+\]</span> From the last equalities I can find <span class="math display">\[
+\D x=\frac 12(\D z+\D \bar z),\quad \D y=\frac{1}{2\I}(\D z-\D\bar z).
+\]</span> Plugging these expression into the formula for <span class="math inline">\(\D f\)</span> and rearranging, I find <span class="math display">\[
+\D f=\frac{1}{2}\left(\frac{\partial f}{\partial x}-\I \frac{\partial f}{\partial y}\right)\D z+\frac{1}{2}\left(\frac{\partial f}{\partial x}+\I \frac{\partial f}{\partial y}\right)\D\bar z.
+\]</span> This prompts me to define two operators <span class="math inline">\(\partial f\)</span> and <span class="math inline">\(\bar{\partial} f\)</span> as follows (note, strictly speaking they are <em>not</em> partial derivatives!) <span class="math display">\[
+\partial f=\frac{\partial f}{\partial z}=\frac{1}{2}\left(\frac{\partial f}{\partial x}-\I \frac{\partial f}{\partial y}\right),\quad \bar\partial f=\frac{\partial f}{\partial \bar z}=\frac{1}{2}\left(\frac{\partial f}{\partial x}+\I \frac{\partial f}{\partial y}\right)
+\]</span> so that I can write <span class="math display">\[
+\D f=\partial f\D z+\bar{\partial} f\D\bar z.
+\]</span> These operators are called Wirtinger’s derivatives.</p>
+<p>Now to the magic of the right notation. I claim that <span class="math inline">\(f\)</span> is holomorphic if and only if <span class="math display">\[\bar \partial f=\frac{\partial f}{\partial \bar{z}}=0.\]</span> Moreover, if <span class="math inline">\(f\)</span> is holomorphic then its Wirtinger derivative <span class="math inline">\(\partial f\)</span> agrees with the usual one <span class="math display">\[
+\D f=\partial f\D z
+\]</span> or <span class="math display">\[
+f'=\frac{\D f}{\D z}=\frac{\partial f}{\partial z}.
+\]</span></p>
+<div class="thm exercise style-definition" id="exercise-4"><p><span class="thm-head">Exercise 4.</span> Prove the last statements using the Cauchy–Riemann equations.</p>
+</div>
+<p>It can be proved (nothing other than calculus is required here, so I will leave it to you to practice your skills in partial differentiation) that Wirtinger’s derivatives are linear operators, satisfy the usual product and chain rules, and also have the conjugation property that <span class="math display">\[
+\overline{\partial f}=\bar \partial \bar f,\quad \overline{\bar{\partial} f}=\partial \bar f.
+\]</span> Using these properties one can justify a natural calculation of the form <span class="math display">\[
+\partial (z^3+z^2\bar z)=3z^2+2z\bar z
+\]</span> and similar ones.</p>
+<p>So in some sense “<span class="math inline">\(f\)</span> is holomorphic only if it has no <span class="math inline">\(\bar z\)</span> in it, i.e., <span class="math inline">\(\bar\partial f=0\)</span>.” Do not take this statement literally though.</p>
+<p>To conclude here is a cool application of Wirtinger’s derivatives.</p>
+<div class="thm example style-definition" id="example-5-19"><p><span class="thm-head">Example 5.19.</span> Show that the function <span class="math inline">\(g(z)=\log |f(z)|\)</span> is harmonic on <span class="math inline">\(E\)</span> if <span class="math inline">\(f\)</span> is holomorphic on <span class="math inline">\(E\)</span> and <span class="math inline">\(f(z)\neq 0\)</span>. Note that here <span class="math inline">\(\log\)</span> is our usual real natural logarithm from school.</p>
+<p>Recall that <span class="math inline">\(g\)</span> is harmonic if it satisfies <span class="math inline">\(\Delta g=g_{xx}+g_{yy}=0\)</span>. Using the definition of Wirtinger’s derivatives one can find (fill in the details) that <span class="math display">\[
+\Delta g=4\partial \bar{\partial} g.
+\]</span> So all we need is to show that <span class="math inline">\(\partial\bar{\partial}(\log f\bar f)=0\)</span>. Now to the computations: <span class="math display">\[
+\bar{\partial}\log f\bar f=\frac{1}{f\bar f}(\bar f\bar\partial f+f\bar{\partial}\bar f)=\mbox{($f$ is holomorphic!)}=\frac{\bar{\partial}\bar f}{\bar f}\,.
+\]</span> Next, <span class="math display">\[
+\partial \frac{\bar{\partial}\bar f}{\bar f}=\frac{\bar f\partial\bar{\partial}\bar f-\partial\bar f\cdot\bar\partial \bar f}{\bar f^2}=\frac{1}{\bar f}\bar \partial(\partial \bar f)=0
+\]</span> and we are done (note that I used twice the fact that <span class="math inline">\(f\)</span> is holomorphic in the last line).</p>
+</div>
+</div>
+</article>
+<nav class="pager" aria-label="More sections"><a class="prev" href="04.html"><span class="dir">Previous</span><span class="pt"><span class="pnum">4</span> Functions of complex variables. Continuity and differentiability</span></a><span></span></nav>
+</main>
+</div>
+<a class="to-top" href="#" aria-label="Back to top">&uarr;</a>
+</body>
+</html>

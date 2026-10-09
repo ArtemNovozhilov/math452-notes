@@ -31,7 +31,7 @@
     --exr: #c39ad2; --exr-bg: #221a26;
     --adv-bg: #161b23;
   }
-  .notes figure img { filter: invert(.92) hue-rotate(180deg); }
+  .notes figure img { background: #f4f5f7; border-radius: 6px; padding: .6rem; }
 }
 
 * { box-sizing: border-box; }
@@ -243,3 +243,6 @@ figcaption { font-size: .9rem; color: var(--muted); font-style: italic; max-widt
   details.reveal > *:not(summary) { display: block; }
 }
 .sidetoc li.adv .tnum::before { content: "*"; }
+.fig-row { display: flex; justify-content: center; align-items: flex-end; gap: 3%; flex-wrap: wrap; }
+.notes .fig-row img { margin: 0; min-width: min(100%, 220px); }
+mjx-container.wide { display: inline-block; max-width: 100%; overflow-x: auto; overflow-y: hidden; vertical-align: middle; }

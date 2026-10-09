@@ -2,6 +2,22 @@
 (function () {
   "use strict";
 
+  /* long inline formulas that do not fit on a phone: let them scroll sideways */
+  function fitInlineMath() {
+    document.querySelectorAll("mjx-container:not([display='true'])").forEach(function (c) {
+      c.classList.remove("wide");
+      var box = c.closest("p, li, figcaption, td") || c.parentElement;
+      if (c.getBoundingClientRect().width > box.getBoundingClientRect().width) c.classList.add("wide");
+    });
+  }
+  function whenMathReady(fn) {
+    if (window.MathJax && MathJax.startup && MathJax.startup.promise) MathJax.startup.promise.then(fn);
+    else setTimeout(function () { whenMathReady(fn); }, 200);
+  }
+  whenMathReady(fitInlineMath);
+  var rT;
+  window.addEventListener("resize", function () { clearTimeout(rT); rT = setTimeout(fitInlineMath, 200); });
+
   /* reading progress bar and back-to-top button */
   var bar = document.querySelector(".progress span");
   var top = document.querySelector(".to-top");
